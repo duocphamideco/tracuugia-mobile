@@ -176,7 +176,7 @@ const defaults = [
     target: "_blank"
   },
  {
-    id: "baogia-danhmuc",
+    id: "baocao-giaodich",
     name: "Khai báo cáo giao dịch",
     url: "https://duocphamideco.github.io/baocaokh/",
     icon: "📋",
@@ -189,13 +189,33 @@ const defaults = [
 let apps = loadApps();
 let query = "";
 
+function uniqueAppId(used) {
+  let id;
+  do {
+    id = "app-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+  } while (used.has(id));
+  return id;
+}
 function loadApps() {
+  let source = defaults;
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return Array.isArray(saved) && saved.length ? saved : defaults;
-  } catch(e) {
-    return defaults;
-  }
+    if (Array.isArray(saved) && saved.length) source = saved;
+  } catch(e) {}
+  const used = new Set();
+  const result = source.map(app => {
+    const a = {...app};
+    // Repair duplicate IDs while preserving each card's saved URL and settings.
+    if (typeof a.id !== "string" || !/^[a-zA-Z0-9_-]+$/.test(a.id) || used.has(a.id)) {
+      a.id = uniqueAppId(used);
+    }
+    used.add(a.id);
+    return a;
+  });
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+  } catch(e) {}
+  return result;
 }
 function saveApps() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
@@ -283,7 +303,7 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   if (id) {
     apps = apps.map(a => a.id === id ? {...a,name,url,icon,target} : a);
   } else {
-    apps.push({id:"app-"+Date.now(),name,url,icon,target});
+    apps.push({id:uniqueAppId(new Set(apps.map(a => a.id))),name,url,icon,target});
   }
   saveApps(); render(); closeSheet();
 });
