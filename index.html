@@ -181,9 +181,14 @@ const defaults = [
     url: "https://duocphamideco.github.io/baocaokh/",
     icon: "📋",
     target: "_blank"
+  },
+  {
+    id: "tim-khach-hang-mobile",
+    name: "TÌM KHÁCH HÀNG TRÊN MOBILE",
+    url: "https://idecopharma.github.io/timkhachhang/",
+    icon: "👥",
+    target: "_blank"
   }
-
-  
 ];
 
 let apps = loadApps();
@@ -200,7 +205,18 @@ function loadApps() {
   let source = defaults;
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (Array.isArray(saved) && saved.length) source = saved;
+    if (Array.isArray(saved) && saved.length) {
+      source = saved;
+      // One-time migration: add the new IDECO menu even on devices
+      // with an older locally saved app list. Respect later user deletion.
+      const migrationKey = "ideco_mobile_hub_added_timkh_mobile_v1";
+      if (!localStorage.getItem(migrationKey)) {
+        if (!source.some(a => a.id === "tim-khach-hang-mobile" || a.url === "https://idecopharma.github.io/timkhachhang/")) {
+          source = [...source, {...defaults.find(a => a.id === "tim-khach-hang-mobile")}];
+        }
+        localStorage.setItem(migrationKey, "1");
+      }
+    }
   } catch(e) {}
   const used = new Set();
   const result = source.map(app => {
