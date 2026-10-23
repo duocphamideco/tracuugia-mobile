@@ -49,6 +49,9 @@ body{min-height:100vh}
 }
 .card:active{transform:scale(.98)}
 .icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:#fff1ef;color:var(--red);font-size:25px;margin-bottom:15px}
+.app-title-link{color:inherit;text-decoration:none;display:inline-block;cursor:pointer}
+.app-title-link:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:3px}
+.app-title-link:active{color:var(--red)}
 .card h3{font-size:15px;line-height:1.25;margin:0 28px 6px 0;font-weight:800}
 .card p{font-size:11.5px;line-height:1.35;margin:0;color:var(--muted);word-break:break-word}
 .openBtn{margin-top:auto;padding-top:12px;color:var(--red);font-size:12px;font-weight:800;display:flex;align-items:center;gap:5px}
@@ -260,7 +263,7 @@ function render() {
         <button onclick="deleteApp('${a.id}')">🗑️ Xóa</button>
       </div>
       <div class="icon">${safeText(a.icon || "🌐")}</div>
-      <h3>${safeText(a.name)}</h3>
+      <h3><a class="app-title-link" href="${safeText(normalizeUrl(a.url))}" target="${a.target === "_self" ? "_self" : "_blank"}" rel="noopener noreferrer" title="Mở ${safeText(a.name)}">${safeText(a.name)}</a></h3>
       <p>${safeText(new URL(normalizeUrl(a.url)).hostname)}</p>
       <div class="openBtn" onclick="openApp('${a.id}')">Mở ứng dụng <span>→</span></div>
     </article>
