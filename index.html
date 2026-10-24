@@ -171,7 +171,7 @@ body.viewer-open{overflow:hidden}
     <p class="loginSubtitle">Đăng nhập để sử dụng trung tâm ứng dụng nội bộ IDECO.</p>
     <label for="loginPassword">Mật khẩu truy cập</label>
     <div class="loginField">
-      <input id="loginPassword" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" autocapitalize="off" spellcheck="false" required>
+      <input id="loginPassword" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required>
       <button class="loginEye" id="loginEye" type="button" aria-label="Hiện mật khẩu" aria-pressed="false">👁</button>
     </div>
     <button class="loginSubmit" type="submit">ĐĂNG NHẬP</button>
@@ -286,7 +286,8 @@ body.viewer-open{overflow:hidden}
 // localStorage chỉ lưu cờ đã đăng nhập trên trình duyệt hiện tại; không lưu mật khẩu.
 // Đây là lớp khóa giao diện tiện dụng, KHÔNG thay thế xác thực trên máy chủ.
 const LOGIN_KEY = "ideco_mobile_hub_login_v1";
-const ACCESS_PASSWORD = "côngtyideco2026";
+// Hỗ trợ mật khẩu có dấu và không dấu để nhập thuận tiện trên điện thoại.
+const ACCESS_PASSWORDS = new Set(["congtyideco2026", "côngtyideco2026"]);
 const loginOverlay = document.getElementById("loginOverlay");
 const loginInput = document.getElementById("loginPassword");
 const loginError = document.getElementById("loginError");
@@ -310,7 +311,8 @@ setLoggedIn(rememberedLogin);
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {
   event.preventDefault();
-  if (loginInput.value.normalize("NFC") !== ACCESS_PASSWORD) {
+  const suppliedPassword = loginInput.value.trim().normalize("NFC").toLocaleLowerCase("vi");
+  if (!ACCESS_PASSWORDS.has(suppliedPassword)) {
     loginError.textContent = "Mật khẩu không đúng. Vui lòng thử lại.";
     loginInput.focus();
     loginInput.select();
