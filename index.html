@@ -378,8 +378,8 @@ const defaults = [
   },
   {
     id: "nhac-ke-hoach-checklist-mobile",
-    name: "NHẮC THÔNG BÁO KẾ HOẠCH-CHEKLIST",
-    url: "https://duocphamideco.github.io/nhackehoachchecklist-mobile/",
+    name: "NHẮC THÔNG BÁO KẾ HOẠCH-CHECKLIST",
+    url: "https://duocphamideco.github.io/nhackehoach-checklist-mobile/",
     icon: "🔔",
     target: "_hub"
   },
@@ -464,6 +464,16 @@ function loadApps() {
   const used = new Set();
   const result = source.filter(a => a && typeof a === "object").map(app => {
     const a = {...app};
+    // Vá URL 404 đã lưu trong localStorage từ các bản cũ.
+    // Sửa theo URL cũ, không làm mất menu cá nhân và không cần xóa dữ liệu trình duyệt.
+    const oldReminderUrl = "https://duocphamideco.github.io/nhackehoachchecklist-mobile";
+    const normalizedSavedUrl = String(a.url || "").trim().replace(/\/+$/, "").toLowerCase();
+    if (normalizedSavedUrl === oldReminderUrl) {
+      a.url = "https://duocphamideco.github.io/nhackehoach-checklist-mobile/";
+    }
+    if (a.id === "nhac-ke-hoach-checklist-mobile" && a.name === "NHẮC THÔNG BÁO KẾ HOẠCH-CHEKLIST") {
+      a.name = "NHẮC THÔNG BÁO KẾ HOẠCH-CHECKLIST";
+    }
     a.name = String(a.name || "ỨNG DỤNG").toLocaleUpperCase("vi-VN");
     if (!a.target || !["_hub", "_self", "_blank"].includes(a.target)) a.target = "_hub";
     // Repair duplicate IDs while preserving each card's saved URL and settings.
