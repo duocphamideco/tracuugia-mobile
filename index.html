@@ -26,7 +26,7 @@ body{min-height:100vh}
   border-radius:0 0 30px 30px;
   box-shadow:0 14px 30px rgba(239,49,35,.22);
 }
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .logoBox{width:62px;height:62px;background:#fff;border-radius:18px;padding:8px;box-shadow:0 8px 20px rgba(0,0,0,.12);display:grid;place-items:center}
 .logoBox img{width:100%;height:100%;object-fit:contain}
 .brandText h1{font-size:21px;line-height:1.15;margin:0;color:#fff;font-weight:850;letter-spacing:.2px}
@@ -52,6 +52,8 @@ body{min-height:100vh}
 .app-title-link{color:inherit;text-decoration:none;display:inline-block;cursor:pointer}
 .app-title-link:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:3px}
 .app-title-link:active{color:var(--red)}
+.card h3{text-transform:uppercase}
+.card .openBtn{border:0;background:none;cursor:pointer;text-align:left;font-family:inherit;font-size:12px}
 .card h3{font-size:15px;line-height:1.25;margin:0 28px 6px 0;font-weight:800}
 .card p{font-size:11.5px;line-height:1.35;margin:0;color:var(--muted);word-break:break-word}
 .openBtn{margin-top:auto;padding-top:12px;color:var(--red);font-size:12px;font-weight:800;display:flex;align-items:center;gap:5px}
@@ -87,9 +89,96 @@ body{min-height:100vh}
 .menu button:active{background:#f5f6f7}
 .footerNote{text-align:center;color:#9aa0a8;font-size:11px;margin:18px 0 4px}
 @media (max-width:350px){.grid{grid-template-columns:1fr}}
+/* Đăng nhập 1 lần trên thiết bị, lưu trạng thái tại localStorage. */
+body.is-locked{overflow:hidden}
+body.is-locked .app, body.is-locked .fab{visibility:hidden;pointer-events:none}
+.loginOverlay{position:fixed;inset:0;z-index:200;display:grid;place-items:center;
+  padding:24px 18px calc(24px + env(safe-area-inset-bottom));
+  background:linear-gradient(150deg,#bf2019 0%,#ef3123 50%,#ff7055 100%);}
+.loginOverlay[hidden]{display:none}
+.loginPanel{width:100%;max-width:400px;background:#fff;padding:27px 23px 23px;border-radius:27px;
+  box-shadow:0 22px 56px rgba(84,17,14,.28);text-align:center}
+.loginMark{display:grid;place-items:center;width:66px;height:66px;margin:0 auto 15px;
+  background:#fff0ef;border-radius:20px;font-size:34px}
+.loginPanel h2{margin:0;font-size:23px;font-weight:850;color:#18191c}
+.loginPanel .loginSubtitle{margin:7px 0 20px;font-size:13px;line-height:1.55;color:#686e76}
+.loginPanel label{display:block;text-align:left;font-weight:750;font-size:13px;margin-bottom:7px;color:#434950}
+.loginField{position:relative}
+.loginField input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:12px 50px 12px 14px;
+  border:1.5px solid #d9dce1;border-radius:13px;outline:none;background:#fff;color:#15171a}
+.loginField input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,49,35,.13)}
+.loginEye{position:absolute;right:5px;top:5px;width:40px;height:40px;border:0;background:transparent;
+  font-size:19px;cursor:pointer;color:#5d646f;border-radius:9px}
+.loginSubmit{display:block;width:100%;margin-top:14px;border:0;border-radius:13px;background:var(--red);
+  min-height:49px;color:white;font:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.loginSubmit:active{transform:scale(.99)}
+.loginError{min-height:23px;margin-top:9px;color:#c52219;font-size:12px;font-weight:700}
+.loginHint{font-size:11.5px;line-height:1.5;margin:5px 0 0;color:#858b93}
+.logoutBtn{margin-left:auto;flex-shrink:0;align-self:center;padding:8px 9px;border:1px solid rgba(255,255,255,.55);
+  border-radius:10px;color:white;background:rgba(255,255,255,.15);font-size:12px;font-weight:800;cursor:pointer}
+@media(max-width:370px){.loginPanel{padding:25px 17px}.brandText h1{font-size:19px}.logoutBtn{font-size:11px;padding:7px}}
+/* Khung xem ứng dụng ngay trong IDECO Hub: luôn có nút về trang chủ */
+body.viewer-open{overflow:hidden}
+.viewer{position:fixed;inset:0;z-index:90;background:#fff;display:none;flex-direction:column}
+.viewer.show{display:flex}
+.viewer-bar{flex:none;min-height:64px;padding:calc(7px + env(safe-area-inset-top)) 11px 8px;
+  display:flex;align-items:center;gap:9px;background:linear-gradient(130deg,#dc291e,#f34636);color:#fff;
+  box-shadow:0 5px 18px rgba(0,0,0,.13)}
+.viewer-home{flex:none;border:1px solid rgba(255,255,255,.55);background:#fff;color:#d52920;
+  border-radius:12px;padding:11px 12px;font:inherit;font-size:12px;font-weight:900;white-space:nowrap;cursor:pointer}
+.viewer-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.viewer-name{font-size:12px;font-weight:850;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viewer-sub{font-size:10px;opacity:.9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viewer-action{width:38px;height:39px;flex:none;border:1px solid rgba(255,255,255,.5);
+  border-radius:11px;background:rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer}
+.viewer-help{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;
+  padding:6px 12px;background:#fff8ed;border-bottom:1px solid #f5e0c7;color:#80572b;font-size:11px}
+.viewer-help button{background:none;border:0;padding:4px;font:inherit;color:#bd301b;font-weight:850;white-space:nowrap;cursor:pointer}
+.viewer-main{position:relative;flex:1;min-height:0;background:#fff}
+.viewer-frame{display:block;border:0;width:100%;height:100%;background:#fff}
+.viewer-loading{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:14px;
+  background:#f6f7f9;color:#626975;text-align:center;padding:24px;pointer-events:none}
+.viewer-loading[hidden]{display:none}
+.viewer-spin{width:34px;height:34px;border-radius:50%;border:4px solid #e9c5c0;
+  border-top-color:#ec3a2b;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.viewer-loading strong{color:#25272b;font-size:14px}
+@media(max-width:370px){.viewer-bar{gap:6px;padding-left:6px;padding-right:6px}
+  .viewer-home{font-size:11px;padding:11px 8px}.viewer-action{width:34px}.viewer-help{font-size:10px}}
+
+/* Nút quay về ERP từ trang chủ IDECO Hub — giữ điều hướng trong cùng tab */
+.erpHomeLink{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;margin:16px 0 0;padding:12px 14px;
+  border-radius:15px;border:1.5px solid rgba(255,255,255,.75);
+  background:#fff;color:#cb261c;text-decoration:none;
+  box-shadow:0 7px 17px rgba(101,22,11,.14);
+  font-size:14px;font-weight:850;line-height:1.25;letter-spacing:.02em;
+  transition:background .16s, transform .16s;
+}
+.erpHomeLink:active{transform:scale(.99);background:#fff2f0}
+.erpHomeLink:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.erpHomeLink .erpHomeIcon{font-size:20px;line-height:1;flex:none}
+.erpHomeLink .erpHomeArrow{margin-left:auto;font-size:17px;opacity:.8}
+.erpHomeLink .erpHomeText{flex:1;text-align:center}
 </style>
 </head>
-<body>
+<body class="is-locked">
+<div class="loginOverlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginHeading">
+  <form class="loginPanel" id="loginForm">
+    <div class="loginMark" aria-hidden="true">🔐</div>
+    <h2 id="loginHeading">IDECO Mobile Hub</h2>
+    <p class="loginSubtitle">Đăng nhập để sử dụng trung tâm ứng dụng nội bộ IDECO.</p>
+    <label for="loginPassword">Mật khẩu truy cập</label>
+    <div class="loginField">
+      <input id="loginPassword" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" autocapitalize="off" spellcheck="false" required>
+      <button class="loginEye" id="loginEye" type="button" aria-label="Hiện mật khẩu" aria-pressed="false">👁</button>
+    </div>
+    <button class="loginSubmit" type="submit">ĐĂNG NHẬP</button>
+    <div id="loginError" class="loginError" role="alert" aria-live="polite"></div>
+    <p class="loginHint">Thiết bị sẽ ghi nhớ đăng nhập. Chỉ cần nhập lại khi anh đăng xuất hoặc xóa dữ liệu trình duyệt.</p>
+  </form>
+</div>
 <div class="app">
   <header class="hero">
     <div class="brand">
@@ -98,7 +187,13 @@ body{min-height:100vh}
         <h1>IDECO Mobile Hub</h1>
         <p>Trung tâm ứng dụng nội bộ</p>
       </div>
+      <button class="logoutBtn" id="logoutBtn" type="button" title="Đăng xuất khỏi IDECO Mobile Hub">Đăng xuất</button>
     </div>
+    <a class="erpHomeLink" id="erpHomeLink" href="https://erp-ideco.skyit.vn/#/app/dashboard/main/" target="_self" aria-label="Về HOME ERP, mở trang Dashboard ERP trong cùng tab">
+      <span class="erpHomeIcon" aria-hidden="true">⌂</span>
+      <span class="erpHomeText">VỀ HOME ERP</span>
+      <span class="erpHomeArrow" aria-hidden="true">↗</span>
+    </a>
     <div class="searchWrap">
       <input id="search" type="search" placeholder="Tìm ứng dụng..." autocomplete="off">
       <div class="searchIcon">⌕</div>
@@ -149,8 +244,9 @@ body{min-height:100vh}
       <div class="field">
         <label>Mở liên kết</label>
         <select id="appTarget">
-          <option value="_blank">Trang mới</option>
-          <option value="_self">Trong app</option>
+          <option value="_hub">Trong IDECO Hub (có nút Trang chủ)</option>
+          <option value="_self">Cùng tab (dùng nút Quay lại trình duyệt)</option>
+          <option value="_blank">Tab mới (tùy chọn)</option>
         </select>
       </div>
     </div>
@@ -161,36 +257,143 @@ body{min-height:100vh}
   </div>
 </div>
 
+<!-- Chỉ mở một ứng dụng tại một thời điểm; thanh công cụ do IDECO Hub quản lý. -->
+<section class="viewer" id="appViewer" aria-label="Đang sử dụng ứng dụng" aria-hidden="true">
+  <div class="viewer-bar">
+    <button type="button" class="viewer-home" id="viewerHome" title="Quay về danh sách ứng dụng">⌂ TRANG CHỦ</button>
+    <div class="viewer-info">
+      <div class="viewer-name" id="viewerName">ỨNG DỤNG IDECO</div>
+      <div class="viewer-sub" id="viewerDomain"></div>
+    </div>
+    <button type="button" class="viewer-action" id="viewerReload" title="Tải lại ứng dụng" aria-label="Tải lại">↻</button>
+    <button type="button" class="viewer-action" id="viewerExternal" title="Mở trang trực tiếp trong tab hiện tại nếu bị chặn nhúng" aria-label="Mở trực tiếp">↗</button>
+  </div>
+  <div class="viewer-help">
+    <span>Nếu trang không hiển thị hoặc không đăng nhập được:</span>
+    <button type="button" id="viewerFallback">↗ MỞ TRỰC TIẾP</button>
+  </div>
+  <div class="viewer-main">
+    <iframe class="viewer-frame" id="viewerFrame" title="Ứng dụng IDECO" allow="camera; microphone; clipboard-read; clipboard-write; geolocation; fullscreen" allowfullscreen loading="eager"></iframe>
+    <div class="viewer-loading" id="viewerLoading" hidden>
+      <div class="viewer-spin" aria-hidden="true"></div>
+      <strong>ĐANG MỞ ỨNG DỤNG…</strong>
+      <span>Chỉ một ứng dụng được mở trong IDECO Hub.</span>
+    </div>
+  </div>
+</section>
+
 <script>
+// localStorage chỉ lưu cờ đã đăng nhập trên trình duyệt hiện tại; không lưu mật khẩu.
+// Đây là lớp khóa giao diện tiện dụng, KHÔNG thay thế xác thực trên máy chủ.
+const LOGIN_KEY = "ideco_mobile_hub_login_v1";
+const ACCESS_PASSWORD = "côngtyideco2026";
+const loginOverlay = document.getElementById("loginOverlay");
+const loginInput = document.getElementById("loginPassword");
+const loginError = document.getElementById("loginError");
+
+function setLoggedIn(loggedIn) {
+  document.body.classList.toggle("is-locked", !loggedIn);
+  loginOverlay.hidden = loggedIn;
+  if (loggedIn) {
+    loginInput.value = "";
+    loginError.textContent = "";
+  } else {
+    loginInput.value = "";
+    setTimeout(() => loginInput.focus(), 80);
+  }
+}
+
+// Kiểm tra mỗi khi mở trang; localStorage lưu được qua lần đóng mở trình duyệt.
+let rememberedLogin = false;
+try { rememberedLogin = localStorage.getItem(LOGIN_KEY) === "1"; } catch (e) {}
+setLoggedIn(rememberedLogin);
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  if (loginInput.value.normalize("NFC") !== ACCESS_PASSWORD) {
+    loginError.textContent = "Mật khẩu không đúng. Vui lòng thử lại.";
+    loginInput.focus();
+    loginInput.select();
+    return;
+  }
+  try { localStorage.setItem(LOGIN_KEY, "1"); } catch (e) {
+    // Vẫn cho dùng trong phiên hiện tại nếu trình duyệt chặn lưu trữ.
+  }
+  setLoggedIn(true);
+});
+
+document.getElementById("loginEye").addEventListener("click", function() {
+  const visible = loginInput.type === "password";
+  loginInput.type = visible ? "text" : "password";
+  this.setAttribute("aria-pressed", String(visible));
+  this.setAttribute("aria-label", visible ? "Ẩn mật khẩu" : "Hiện mật khẩu");
+  this.textContent = visible ? "🙈" : "👁";
+  loginInput.focus();
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function() {
+  closeViewer();
+  try { localStorage.removeItem(LOGIN_KEY); } catch (e) {}
+  setLoggedIn(false);
+});
+
 const STORAGE_KEY = "ideco_mobile_hub_apps_v1";
 const defaults = [
   {
     id: "baogia-danhmuc",
-    name: "Báo giá danh mục",
+    name: "BÁO GIÁ DANH MỤC",
     url: "https://duocphamideco.github.io/baogia-danhmuc/",
     icon: "📋",
-    target: "_blank"
+    target: "_hub"
   },
   {
     id: "baogia-poster",
-    name: "Báo giá poster",
+    name: "BÁO GIÁ POSTER",
     url: "https://duocphamideco.github.io/baogia-poster",
     icon: "🖼️",
-    target: "_blank"
+    target: "_hub"
   },
  {
     id: "baocao-giaodich",
-    name: "Khai báo cáo giao dịch",
+    name: "KHAI BÁO CÁO GIAO DỊCH",
     url: "https://duocphamideco.github.io/baocaokh/",
     icon: "📋",
-    target: "_blank"
+    target: "_hub"
   },
   {
     id: "tim-khach-hang-mobile",
     name: "TÌM KHÁCH HÀNG TRÊN MOBILE",
     url: "https://idecopharma.github.io/timkhachhang/",
     icon: "👥",
-    target: "_blank"
+    target: "_hub"
+  },
+  {
+    id: "erp-cong-ty-mobile",
+    name: "ERP CÔNG TY TRÊN MOBILE",
+    url: "https://erp-ideco.skyit.vn",
+    icon: "🏢",
+    target: "_hub"
+  },
+  {
+    id: "nhac-ke-hoach-checklist-mobile",
+    name: "NHẮC THÔNG BÁO KẾ HOẠCH-CHEKLIST",
+    url: "https://duocphamideco.github.io/nhackehoachchecklist-mobile/",
+    icon: "🔔",
+    target: "_hub"
+  },
+  {
+    id: "quan-ly-dat-hang-kh-mobile",
+    name: "QUẢN LÝ ĐẶT HÀNG-KH",
+    url: "https://duocphamideco.github.io/quanlykhachhang-mobile/",
+    icon: "🛒",
+    target: "_hub"
+  },
+  {
+    id: "ke-hoach-checklist-mobile",
+    name: "KẾ HOẠCH-CHECKLIST",
+    url: "https://duocphamideco.github.io/kehoach-checklist-mobile/",
+    icon: "🗓️",
+    target: "_hub"
   }
 ];
 
@@ -220,10 +423,47 @@ function loadApps() {
         localStorage.setItem(migrationKey, "1");
       }
     }
-  } catch(e) {}
+    // Cập nhật một lần cho cả thiết bị đã lưu menu phiên bản trước.
+    // Không tự thêm lại nếu sau đó người dùng đã chủ động xóa menu.
+    const newMenusMigrationKey = "ideco_mobile_hub_added_erp_checklist_dathang_v1";
+    if (!localStorage.getItem(newMenusMigrationKey)) {
+      const newMenuIds = new Set([
+        "erp-cong-ty-mobile",
+        "nhac-ke-hoach-checklist-mobile",
+        "quan-ly-dat-hang-kh-mobile"
+      ]);
+      const sameUrl = url => String(url || "").trim().replace(/\/+$/, "");
+      for (const app of defaults) {
+        if (!newMenuIds.has(app.id)) continue;
+        if (!source.some(existing => existing &&
+          (existing.id === app.id || sameUrl(existing.url) === sameUrl(app.url)))) {
+          source = [...source, {...app}];
+        }
+      }
+      localStorage.setItem(newMenusMigrationKey, "1");
+    }
+    // Nâng cấp dữ liệu đã lưu từ các phiên bản trước mà không xóa menu cá nhân.
+    const homeMigrationKey = "ideco_mobile_hub_home_view_v1";
+    if (!localStorage.getItem(homeMigrationKey)) {
+      // Giữ menu đã xóa ở bản trước; chỉ thêm menu mới lần đầu.
+      const newApp = defaults.find(a => a.id === "ke-hoach-checklist-mobile");
+      const normalized = url => String(url || "").trim().replace(/\/+$/, "").toLowerCase();
+      if (!source.some(a => a && (a.id === newApp.id || normalized(a.url) === normalized(newApp.url)))) {
+        source = [...source, {...newApp}];
+      }
+      source = source.map(a => a && {...a, target: "_hub"});
+      localStorage.setItem(homeMigrationKey, "1");
+    }
+  } catch(e) {
+    // localStorage có thể bị chặn: vẫn hiển thị menu mặc định.
+    const newApp = defaults.find(a => a.id === "ke-hoach-checklist-mobile");
+    if (!source.some(a => a && a.id === newApp.id)) source = [...source, {...newApp}];
+  }
   const used = new Set();
-  const result = source.map(app => {
+  const result = source.filter(a => a && typeof a === "object").map(app => {
     const a = {...app};
+    a.name = String(a.name || "ỨNG DỤNG").toLocaleUpperCase("vi-VN");
+    if (!a.target || !["_hub", "_self", "_blank"].includes(a.target)) a.target = "_hub";
     // Repair duplicate IDs while preserving each card's saved URL and settings.
     if (typeof a.id !== "string" || !/^[a-zA-Z0-9_-]+$/.test(a.id) || used.has(a.id)) {
       a.id = uniqueAppId(used);
@@ -237,7 +477,7 @@ function loadApps() {
   return result;
 }
 function saveApps() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(apps)); } catch(e) {}
 }
 function safeText(s) {
   return String(s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -263,19 +503,70 @@ function render() {
         <button onclick="deleteApp('${a.id}')">🗑️ Xóa</button>
       </div>
       <div class="icon">${safeText(a.icon || "🌐")}</div>
-      <h3><a class="app-title-link" href="${safeText(normalizeUrl(a.url))}" target="${a.target === "_self" ? "_self" : "_blank"}" rel="noopener noreferrer" title="Mở ${safeText(a.name)}">${safeText(a.name)}</a></h3>
+      <h3><a class="app-title-link" href="${safeText(normalizeUrl(a.url))}" onclick="openApp('${a.id}');return false" title="Mở ${safeText(a.name)} ngay trong IDECO Hub">${safeText(a.name)}</a></h3>
       <p>${safeText(new URL(normalizeUrl(a.url)).hostname)}</p>
-      <div class="openBtn" onclick="openApp('${a.id}')">Mở ứng dụng <span>→</span></div>
+      <button type="button" class="openBtn" onclick="openApp('${a.id}')">MỞ ỨNG DỤNG <span>→</span></button>
     </article>
   `).join("");
 }
+// Mọi menu mặc định sử dụng bộ xem tích hợp có thanh TRANG CHỦ cố định.
+// Website ngoài có thể từ chối iframe (X-Frame-Options/CSP) hoặc cookie bên thứ ba.
+// Khi đó dùng nút MỞ TRỰC TIẾP ngay trên thanh công cụ (cùng tab, không thêm tab).
+const viewer = document.getElementById("appViewer");
+const viewerFrame = document.getElementById("viewerFrame");
+const viewerLoading = document.getElementById("viewerLoading");
+let currentAppId = null;
+let frameLoadFallback = null;
+
 function openApp(id) {
   const a = apps.find(x => x.id === id);
   if (!a) return;
   const url = normalizeUrl(a.url);
-  if (a.target === "_self") window.location.href = url;
-  else window.open(url, "_blank", "noopener,noreferrer");
+  if (!/^https?:\/\//i.test(url)) return alert("Đường dẫn ứng dụng chưa hợp lệ.");
+  if (a.target === "_self") { window.location.assign(url); return; }
+  if (a.target === "_blank") { window.open(url, "_blank", "noopener,noreferrer"); return; }
+
+  currentAppId = id;
+  document.getElementById("viewerName").textContent = String(a.name).toLocaleUpperCase("vi-VN");
+  document.getElementById("viewerDomain").textContent = new URL(url).hostname;
+  viewerFrame.title = a.name;
+  viewer.classList.add("show");
+  viewer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("viewer-open");
+  viewerLoading.hidden = false;
+  // Nhúng iframe chạy trong trang Hub. Chỉ tải khi người dùng bấm menu.
+  viewerFrame.src = url;
+  document.getElementById("viewerHome").focus({preventScroll:true});
 }
+function closeViewer() {
+  currentAppId = null;
+  viewer.classList.remove("show");
+  viewer.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("viewer-open");
+  viewerLoading.hidden = true;
+  viewerFrame.removeAttribute("src"); // giải phóng trang trước khi mở trang khác
+  document.getElementById("search").focus({preventScroll:true});
+}
+function currentApp() { return apps.find(a => a.id === currentAppId); }
+function openViewerDirect() {
+  const a = currentApp();
+  if (!a) return;
+  // Quay lại Hub bằng nút Quay lại của trình duyệt khi website không cho nhúng.
+  window.location.assign(normalizeUrl(a.url));
+}
+document.getElementById("viewerHome").addEventListener("click", closeViewer);
+document.getElementById("viewerReload").addEventListener("click", () => {
+  const a = currentApp();
+  if (!a) return;
+  viewerLoading.hidden = false;
+  viewerFrame.src = normalizeUrl(a.url);
+});
+document.getElementById("viewerExternal").addEventListener("click", openViewerDirect);
+document.getElementById("viewerFallback").addEventListener("click", openViewerDirect);
+viewerFrame.addEventListener("load", () => { viewerLoading.hidden = true; });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && currentAppId) closeViewer();
+});
 function toggleMenu(ev,id) {
   ev.stopPropagation();
   document.querySelectorAll(".menu").forEach(m => {
@@ -292,7 +583,7 @@ function openSheet(app=null) {
   document.getElementById("appName").value = app?.name || "";
   document.getElementById("appUrl").value = app?.url || "";
   document.getElementById("appIcon").value = app?.icon || "🌐";
-  document.getElementById("appTarget").value = app?.target || "_blank";
+  document.getElementById("appTarget").value = app?.target || "_hub";
   backdrop.classList.add("show");
   setTimeout(() => document.getElementById("appName").focus(), 120);
 }
@@ -310,7 +601,7 @@ function deleteApp(id) {
 }
 document.getElementById("saveBtn").addEventListener("click", () => {
   const id = document.getElementById("editId").value;
-  const name = document.getElementById("appName").value.trim();
+  const name = document.getElementById("appName").value.trim().toLocaleUpperCase("vi-VN");
   const url = normalizeUrl(document.getElementById("appUrl").value);
   const icon = document.getElementById("appIcon").value;
   const target = document.getElementById("appTarget").value;
