@@ -161,6 +161,71 @@ body.viewer-open{overflow:hidden}
 .erpHomeLink .erpHomeIcon{font-size:20px;line-height:1;flex:none}
 .erpHomeLink .erpHomeArrow{margin-left:auto;font-size:17px;opacity:.8}
 .erpHomeLink .erpHomeText{flex:1;text-align:center}
+
+/* === IDECO: Đồng bộ lịch nhắc vào lịch hệ thống từ MỘT FILE HTML === */
+.cal-home{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 0;
+ padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.18);
+ color:#fff;font-size:13px;font-weight:850;font-family:inherit;cursor:pointer}
+.cal-overlay{position:fixed;inset:0;z-index:180;background:rgba(11,14,22,.63);display:none;
+ justify-content:center;align-items:flex-end;padding-top:env(safe-area-inset-top)}
+.cal-overlay.show{display:flex}
+.cal-panel{background:#fff;border-radius:24px 24px 0 0;width:min(570px,100%);max-height:94dvh;overflow-y:auto;
+ padding:19px 17px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px #0002}
+.cal-panel h2{margin:0;font-size:19px}.cal-panel p{line-height:1.55;font-size:12.5px;color:#666f7b}
+.cal-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cal-close{background:#f0f2f6;border:0;border-radius:11px;font:inherit;font-weight:800;padding:9px 13px;cursor:pointer}
+.cal-panel label{display:block;font-size:12px;font-weight:850;margin:14px 0 6px}
+.cal-panel select{display:block;width:100%;border:1px solid #d3d8df;padding:12px;border-radius:12px;font-size:15px;background:white}
+.cal-buttons{display:flex;gap:9px;margin:12px 0;flex-wrap:wrap}
+.cal-buttons button{flex:1;min-width:120px;border:0;border-radius:12px;padding:11px 10px;font:inherit;font-size:13px;
+ font-weight:850;background:#e83124;color:white;cursor:pointer}
+.cal-buttons button:disabled{opacity:.45;cursor:not-allowed}
+.cal-buttons .secondary{color:#b12b22;background:#fff0ee}
+.cal-status{background:#f4f6fa;padding:10px;border-radius:11px;font-size:12px;line-height:1.5;white-space:pre-line}
+.cal-entry{padding:12px 0;border-bottom:1px solid #edf0f4}
+.cal-entry-title{font-weight:850;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.cal-entry-meta{margin-top:3px;color:#667085;font-size:12px}
+.cal-entry button{border:1px solid #d0d9e7;background:white;border-radius:10px;padding:8px 10px;
+ font-size:12px;font-weight:800;color:#315d94;margin-top:7px;cursor:pointer}
+.cal-note{font-size:11px;color:#656e78;line-height:1.55}
+body.is-locked .cal-home,body.is-locked .cal-overlay{visibility:hidden;pointer-events:none}
+
+
+/* IDECO - lich qua gio CHI trong ngay hien tai, hien lai khi mo ung dung. */
+.late-overlay{position:fixed;inset:0;z-index:190;display:none;align-items:center;justify-content:center;
+ padding:calc(16px + env(safe-area-inset-top)) 12px calc(16px + env(safe-area-inset-bottom));
+ background:rgba(12,19,29,.68);backdrop-filter:blur(4px)}
+.late-overlay.show{display:flex}
+.late-card{width:min(500px,100%);max-height:90dvh;overflow:auto;border-radius:23px;padding:20px 16px;
+ background:#fff;box-shadow:0 20px 55px rgba(0,0,0,.25)}
+.late-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.late-head h2{font-size:19px;font-weight:850;margin:0;color:#ac271e;line-height:1.4}
+.late-head button{border:0;background:#f0f1f4;border-radius:10px;font-size:20px;min-width:38px;min-height:38px;cursor:pointer}
+.late-intro{font-size:12.5px;line-height:1.55;color:#667085;margin:9px 0 12px}
+.late-date{font-weight:850;color:#3b4754}
+.late-card label{display:block;font-weight:850;font-size:12px;margin:12px 0 6px;color:#414a55}
+.late-card select{width:100%;min-height:44px;border-radius:12px;border:1px solid #ccd5dd;
+ padding:9px 11px;background:#fff;color:#222;font:inherit;font-size:14px}
+.late-card select:focus-visible,.late-card button:focus-visible{outline:3px solid #ef8d82;outline-offset:2px}
+.late-summary{font-size:12px;color:#424e60;background:#fff5ed;padding:10px 12px;border-radius:11px;margin:12px 0;line-height:1.5}
+.late-item{border:1px solid #f2dad7;background:#fffafb;border-radius:14px;padding:12px;margin:9px 0}
+.late-item-top{display:flex;justify-content:space-between;gap:7px;align-items:center}
+.late-item-time{color:#c5281d;font-weight:900;font-size:14px}
+.late-item-kind{font-size:11px;color:#727b89}
+.late-item-name{font-size:14px;font-weight:850;color:#242b32;line-height:1.45;margin:6px 0}
+.late-item-meta{font-size:12px;color:#717987;line-height:1.5}
+.late-item button{margin-top:9px;padding:10px 12px;border-radius:10px;color:#27674e;background:#e5f6ed;
+ border:1px solid #b8e6cc;font-size:12px;font-weight:850;font-family:inherit;cursor:pointer}
+.late-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.late-actions button{flex:1;min-width:115px;border:0;border-radius:12px;padding:12px 10px;font:inherit;font-size:12px;font-weight:850;cursor:pointer}
+.late-all{background:#e52c21;color:#fff}.late-later{background:#f2f3f6;color:#414956}
+.late-help{font-size:11px;color:#8a93a0;line-height:1.5;margin:10px 0 0}
+.late-empty{text-align:center;font-size:13px;color:#43745c;background:#eaf9f0;padding:13px;border-radius:13px;margin-top:8px}
+.late-badge{display:inline-grid;place-items:center;border-radius:999px;background:#fff;color:#d62b20;
+ padding:2px 6px;min-width:19px;font-size:11px;font-weight:900}
+.late-badge[hidden]{display:none}
+body.is-locked .late-overlay{visibility:hidden;pointer-events:none}
+
 </style>
 </head>
 <body class="is-locked">
@@ -194,6 +259,8 @@ body.viewer-open{overflow:hidden}
       <span class="erpHomeText">VỀ HOME ERP</span>
       <span class="erpHomeArrow" aria-hidden="true">↗</span>
     </a>
+
+    <button class="cal-home" id="calOpen" type="button">🔔 LỊCH HẸN & LỊCH TRỄ HÔM NAY <span id="lateHomeBadge" class="late-badge" hidden></span> <span aria-hidden="true">›</span></button>
     <div class="searchWrap">
       <input id="search" type="search" placeholder="Tìm ứng dụng..." autocomplete="off">
       <div class="searchIcon">⌕</div>
@@ -257,6 +324,43 @@ body.viewer-open{overflow:hidden}
   </div>
 </div>
 
+
+<!-- Lịch hệ thống làm việc độc lập sau khi người dùng nhập sự kiện; không giả lập Web Push -->
+<div id="calOverlay" class="cal-overlay" role="dialog" aria-modal="true" aria-labelledby="calHeading">
+  <div class="cal-panel">
+    <div class="cal-toolbar"><h2 id="calHeading">📅 LỊCH NHẮC & XUẤT LỊCH</h2><button class="cal-close" id="calClose" type="button">✕ ĐÓNG</button></div>
+    <p>Khi anh/chị mở IDECO Hub, hệ thống tự kiểm tra <b>các lịch đã quá giờ trong HÔM NAY</b> của người được chọn và hiện nhắc lại. Lịch ngày hôm qua hoặc cũ hơn <b>không đưa vào thông báo trễ</b>. Nếu muốn, vẫn có thể xuất .ics để tạo lời nhắc trong ứng dụng Lịch của điện thoại.</p>
+    <label for="calEmployee">Nhân viên có lịch nhắc</label>
+    <select id="calEmployee"><option value="">Đang kết nối...</option></select>
+    <div class="cal-buttons">
+      <button id="calDownload" disabled type="button">📥 XUẤT LỊCH (.ICS)</button>
+      <button id="calRefresh" type="button" class="secondary">↻ CẬP NHẬT</button>
+    </div>
+    <div class="cal-status" id="calStatus" role="status">Sau khi đăng nhập, IDECO Hub sẽ tự kiểm tra lịch trễ trong ngày.</div>
+    <div id="calEntries"></div>
+    <p class="cal-note"><b>Lưu ý:</b> Popup lịch trễ chỉ hiện khi mở IDECO Hub (không phải thông báo đẩy khi đã đóng web). Chỉ lấy lịch trễ của <b>ngày hiện tại</b>. Nếu tải .ics, anh cần mở và <b>thêm sự kiện vào ứng dụng Lịch trên máy</b>, đồng thời bật thông báo của Lịch. Lịch đã nhập sẽ do điện thoại nhắc khi đóng web. Thay đổi hoặc xóa lịch trong Firebase <b>không tự sửa</b> sự kiện đã nhập; cần cập nhật lại lịch trên điện thoại. Nút Google Calendar bên từng mục dùng khi thiết bị không nhập được .ics.</p>
+  </div>
+</div>
+
+
+<!-- LỊCH TRỄ HÔM NAY: không nhắc dồn từ các ngày trước, không cần Service Worker -->
+<div id="lateOverlay" class="late-overlay" role="dialog" aria-modal="true" aria-labelledby="lateHeading">
+  <section class="late-card">
+    <div class="late-head"><h2 id="lateHeading">🔔 LỊCH HẸN TRỄ HÔM NAY</h2><button type="button" id="lateX" aria-label="Đóng thông báo">✕</button></div>
+    <p class="late-intro">Chỉ nhắc lịch đã đến giờ <b>trong ngày</b> <span id="lateToday" class="late-date"></span>.
+      Hôm sau sẽ <b>không</b> nhắc bù lịch hôm trước.</p>
+    <label for="lateEmployee">Chọn tên nhân viên (lưu một lần trên thiết bị)</label>
+    <select id="lateEmployee"><option value="">Đang tải nhân viên...</option></select>
+    <p class="late-summary" id="lateSummary">Đang kiểm tra lịch nhắc...</p>
+    <div id="lateEntries"></div>
+    <div class="late-actions">
+      <button class="late-all" id="lateAllSeen" type="button" hidden>✓ ĐÃ XEM TẤT CẢ</button>
+      <button class="late-later" id="lateLater" type="button">ĐỂ XEM SAU</button>
+    </div>
+    <p class="late-help">Bấm <b>ĐÃ XEM</b> để ngừng nhắc lịch đó trên thiết bị này. Chưa bấm xác nhận thì khi mở lại trong cùng ngày, hệ thống vẫn nhắc. Lịch nhắc gốc trên Firebase không bị sửa.</p>
+  </section>
+</div>
+
 <!-- Chỉ mở một ứng dụng tại một thời điểm; thanh công cụ do IDECO Hub quản lý. -->
 <section class="viewer" id="appViewer" aria-label="Đang sử dụng ứng dụng" aria-hidden="true">
   <div class="viewer-bar">
@@ -265,6 +369,7 @@ body.viewer-open{overflow:hidden}
       <div class="viewer-name" id="viewerName">ỨNG DỤNG IDECO</div>
       <div class="viewer-sub" id="viewerDomain"></div>
     </div>
+    <button type="button" class="viewer-action" id="lateViewerButton" title="Xem lịch hẹn trễ trong ngày" aria-label="Xem lịch hẹn trễ trong ngày">🔔</button>
     <button type="button" class="viewer-action" id="viewerReload" title="Tải lại ứng dụng" aria-label="Tải lại">↻</button>
     <button type="button" class="viewer-action" id="viewerExternal" title="Mở trang trực tiếp trong tab hiện tại nếu bị chặn nhúng" aria-label="Mở trực tiếp">↗</button>
   </div>
@@ -298,7 +403,9 @@ function setLoggedIn(loggedIn) {
   if (loggedIn) {
     loginInput.value = "";
     loginError.textContent = "";
+    document.dispatchEvent(new Event("ideco:logged-in"));
   } else {
+    document.dispatchEvent(new Event("ideco:logged-out"));
     loginInput.value = "";
     setTimeout(() => loginInput.focus(), 80);
   }
@@ -636,5 +743,235 @@ document.getElementById("search").addEventListener("input", e => { query = e.tar
 
 render();
 </script>
+
+<script>
+// IDECO MOBILE HUB - NHAC TRE CUNG NGAY. Duoc dong goi trong 1 file index.html.
+// Lich chi duoc kiem tra khi ung dung mo/duoc kich hoat; khong gia lap background push.
+(function(){
+  'use strict';
+  const e=id=>document.getElementById(id);
+  const cal=e('calOverlay'), list=e('calEntries'), status=e('calStatus'), employee=e('calEmployee'), exp=e('calDownload');
+  const late=e('lateOverlay'), lateEmployee=e('lateEmployee'), lateEntries=e('lateEntries'), lateSummary=e('lateSummary');
+  const FB={apiKey:'AIzaSyCNsKk3vZSbfOcbZv1dCHISTXep2njHOiM',authDomain:'kehoachnew-532cf.firebaseapp.com',databaseURL:'https://kehoachnew-532cf-default-rtdb.firebaseio.com',projectId:'kehoachnew-532cf',storageBucket:'kehoachnew-532cf.firebasestorage.app',messagingSenderId:'124344092261',appId:'1:124344092261:web:90c6ba3edcdd45a2f6a88c'};
+  const KEYS=['plan_task_reminders','checklist_reminders'];
+  const EMP_KEY='ideco_hub_late_employee_v1';
+  const SEEN_KEY='ideco_hub_late_seen_v1';
+  let items=[],chosen='',cachedDb=null,loading=false,loaded=false,refreshPromise=null,lastAutoCheck=0;
+  let names=[];
+  const validDate=x=>{const d=new Date(x);return Number.isFinite(+d)?d:null;};
+  const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim().toLowerCase();
+  const two=n=>String(n).padStart(2,'0');
+  const dateKey=d=>`${d.getFullYear()}-${two(d.getMonth()+1)}-${two(d.getDate())}`;
+  const sameDay=(a,b)=>a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();
+  const safeGet=k=>{try{return localStorage.getItem(k);}catch(err){return null;}};
+  const safeSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(err){/* Private mode */}};
+  const todayLabel=()=>new Intl.DateTimeFormat('vi-VN',{dateStyle:'full'}).format(new Date());
+  chosen=safeGet(EMP_KEY)||'';
+  function say(s){status.textContent=s;}
+  function locked(){return document.body.classList.contains('is-locked');}
+  function openCalendar(){if(locked())return;cal.classList.add('show');document.body.style.overflow='hidden';if(!loaded)refresh();}
+  function closeCalendar(){cal.classList.remove('show');if(!late.classList.contains('show'))document.body.style.overflow='';}
+  function openLate(){if(locked())return;late.classList.add('show');e('lateToday').textContent=todayLabel();document.body.style.overflow='hidden';renderLate();if(!loaded)refresh();}
+  function closeLate(){late.classList.remove('show');if(!cal.classList.contains('show'))document.body.style.overflow='';}
+  e('calOpen').addEventListener('click',openCalendar);
+  e('calClose').addEventListener('click',closeCalendar);
+  e('lateViewerButton').addEventListener('click',openLate);
+  e('lateX').addEventListener('click',closeLate);
+  e('lateLater').addEventListener('click',closeLate);
+  cal.addEventListener('click',v=>{if(v.target===cal)closeCalendar();});
+  late.addEventListener('click',v=>{if(v.target===late)closeLate();});
+  document.addEventListener('keydown',v=>{if(v.key==='Escape'){if(late.classList.contains('show'))closeLate();else if(cal.classList.contains('show'))closeCalendar();}});
+  function loadScript(url){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=url;s.onload=resolve;s.onerror=()=>reject(new Error('Không tải được thư viện Firebase.'));document.head.append(s);});}
+  async function database(){
+    if(cachedDb)return cachedDb;
+    if(!window.firebase)await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
+    if(!window.firebase.database)await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js');
+    const app=window.firebase.apps.find(x=>x.name==='ideco-hub-calendar')||window.firebase.initializeApp(FB,'ideco-hub-calendar');
+    cachedDb=app.database();return cachedDb;
+  }
+  function seenState(){
+    const today=dateKey(new Date());
+    try{const val=JSON.parse(safeGet(SEEN_KEY)||'null');if(val?.day===today&&val.byEmployee&&typeof val.byEmployee==='object')return val;}
+    catch(err){}
+    return {day:today,byEmployee:{}};
+  }
+  function isSeen(it){const state=seenState();return (state.byEmployee[norm(it.name)]||[]).includes(it.id);}
+  function markSeen(idList){
+    const state=seenState(),id=norm(chosen);if(!id)return;
+    const old=Array.isArray(state.byEmployee[id])?state.byEmployee[id]:[];
+    state.byEmployee[id]=[...new Set([...old,...idList])];safeSet(SEEN_KEY,JSON.stringify(state));
+    renderLate();updateBadge();
+  }
+  // Only an occurrence on TODAY may qualify, even for an old recurring series.
+  // A one-time event from yesterday NEVER qualifies for today's popup.
+  function todayOccurrence(it,now=new Date()){
+    const start=validDate(it.time);if(!start||start.getTime()>now.getTime())return null;
+    const today=new Date(now.getFullYear(),now.getMonth(),now.getDate(),start.getHours(),start.getMinutes(),start.getSeconds());
+    let belongs=false;
+    switch(it.repeat){
+      case 'daily':belongs=true;break;
+      case 'weekly':belongs=start.getDay()===now.getDay();break;
+      case 'monthly':belongs=start.getDate()===now.getDate();break;
+      default:belongs=sameDay(start,now);break;
+    }
+    return belongs&&today.getTime()<=now.getTime()?today:null;
+  }
+  function overdue(){
+    const now=new Date();
+    return items.filter(it=>chosen&&norm(it.name)===norm(chosen))
+      .map(it=>({it,due:todayOccurrence(it,now)}))
+      .filter(x=>x.due&&!isSeen(x.it))
+      .sort((a,b)=>a.due-b.due);
+  }
+  function updateBadge(){
+    const badge=e('lateHomeBadge'),count=overdue().length;
+    badge.hidden=!count;
+    badge.textContent=String(count);
+    e('lateViewerButton').title=count?`Có ${count} lịch trễ hôm nay`:'Xem lịch hẹn hôm nay';
+  }
+  function renderLate(){
+    e('lateToday').textContent=todayLabel();
+    lateEntries.replaceChildren();
+    if(!loaded){lateSummary.textContent=loading?'Đang kiểm tra lịch hẹn trong ngày...':'Chưa tải được dữ liệu lịch hẹn.';e('lateAllSeen').hidden=true;return;}
+    if(!chosen){lateSummary.textContent='Anh/chị vui lòng chọn tên nhân viên một lần để nhận thông báo đúng lịch của mình.';
+      e('lateAllSeen').hidden=true;return;}
+    const due=overdue();
+    lateSummary.textContent=due.length?`Hôm nay có ${due.length} lịch đã đến giờ nhưng chưa bấm ĐÃ XEM. Không hiển thị lịch trễ của những ngày trước.`:'Không có lịch trễ chưa xem trong ngày hôm nay.';
+    e('lateAllSeen').hidden=!due.length;
+    if(!due.length){const n=document.createElement('div');n.className='late-empty';n.textContent='✓ Đã kiểm tra lịch trễ hôm nay';lateEntries.append(n);return;}
+    due.forEach(({it,due})=>{
+      const card=document.createElement('div');card.className='late-item';
+      const top=document.createElement('div');top.className='late-item-top';
+      const t=document.createElement('span');t.className='late-item-time';t.textContent=`⏰ ${two(due.getHours())}:${two(due.getMinutes())}`;
+      const kind=document.createElement('span');kind.className='late-item-kind';kind.textContent=it.kind==='checklist'?'CHECKLIST':'KẾ HOẠCH';top.append(t,kind);
+      const name=document.createElement('div');name.className='late-item-name';name.textContent=it.title;
+      const minutes=Math.max(0,Math.floor((Date.now()-due.getTime())/60000));
+      const info=document.createElement('div');info.className='late-item-meta';info.textContent=`Đã trễ ${Math.floor(minutes/60)?Math.floor(minutes/60)+' giờ ':''}${minutes%60} phút${it.department?' • '+it.department:''}`;
+      const btn=document.createElement('button');btn.type='button';btn.textContent='✓ ĐÃ XEM LỊCH NÀY';btn.addEventListener('click',()=>markSeen([it.id]));
+      card.append(top,name,info,btn);lateEntries.append(card);
+    });
+  }
+  e('lateAllSeen').addEventListener('click',()=>{markSeen(overdue().map(x=>x.it.id));closeLate();});
+  function setChosen(v){
+    chosen=v||'';
+    if(chosen)safeSet(EMP_KEY,chosen);else{try{localStorage.removeItem(EMP_KEY);}catch(err){}}
+    lateEmployee.value=chosen;employee.value=chosen;renderCalendar();renderLate();updateBadge();
+    if(chosen&&overdue().length&&!locked())openLate();
+  }
+  employee.addEventListener('change',()=>setChosen(employee.value));
+  lateEmployee.addEventListener('change',()=>setChosen(lateEmployee.value));
+  function syncNames(){
+    names=[...new Map(items.map(x=>[norm(x.name),x.name])).values()].sort((a,b)=>a.localeCompare(b,'vi'));
+    const remembered=names.find(n=>norm(n)===norm(chosen));
+    if(remembered)chosen=remembered;
+    else if(chosen){chosen='';safeSet(EMP_KEY,'');}
+    const first='— CHỌN TÊN NHÂN VIÊN —';
+    for(const element of [employee,lateEmployee]){
+      element.replaceChildren();element.add(new Option(first,''));
+      names.forEach(n=>element.add(new Option(n,n)));
+      element.value=chosen;
+    }
+  }
+  async function refresh(opts={}){
+    if(refreshPromise)return refreshPromise;
+    loading=true;exp.disabled=true;e('calRefresh').disabled=true;
+    say('Đang lấy dữ liệu lịch nhắc từ Firebase…');
+    refreshPromise=(async()=>{
+      try{
+        const db=await database();
+        const snaps=await Promise.all(KEYS.map(k=>db.ref(k).once('value')));
+        const merged=[];
+        snaps.forEach((sp,ix)=>{
+          const plans=sp.val()||{};
+          Object.entries(plans).forEach(([pid,tasks])=>{
+            if(!tasks||typeof tasks!=='object')return;
+            Object.entries(tasks).forEach(([tid,r])=>{
+              if(!r||typeof r!=='object'||!validDate(r.datetime))return;
+              const d=validDate(r.datetime);
+              const repeat=['daily','weekly','monthly'].includes(r.repeat)?r.repeat:'none';
+              // Skip historical one-time reminders, never read them back into a future day's popup.
+              if(d.getTime()<Date.now()-86400000&&repeat==='none')return;
+              merged.push({id:`${ix}:${pid}:${tid}`,pid,tid,kind:ix?'checklist':'plan',name:String(r.employeeName||'Chưa rõ nhân viên').trim(),
+                title:String(r.taskName||'Nhắc kiểm tra kế hoạch').trim(),department:String(r.department||''),
+                time:r.datetime,repeat,objective:String(r.objective||''),expectedResult:String(r.expectedResult||'')});
+            });
+          });
+        });
+        items=merged.sort((a,b)=>new Date(a.time)-new Date(b.time));loaded=true;
+        syncNames();
+        say(`Đã tải ${items.length} lịch nhắc • ${names.length} nhân viên. Chỉ lịch trễ TRONG NGÀY mới hiện popup. Dữ liệu Firebase không bị thay đổi.`);
+        renderCalendar();renderLate();updateBadge();
+        if(!locked()&&opts.autoCheck){
+          if(!chosen&&names.length){openLate();}
+          else if(chosen&&overdue().length){openLate();}
+        }
+      }catch(err){
+        say(`Không đọc được Firebase: ${err.message}. Hãy kiểm tra mạng và quyền đọc dữ liệu.`);
+        if(!loaded){lateSummary.textContent='⚠ Không thể kiểm tra lịch: '+err.message; e('lateHomeBadge').hidden=false;e('lateHomeBadge').textContent='!';}
+      }finally{loading=false;e('calRefresh').disabled=false;exp.disabled=!chosen||!eventList().length;refreshPromise=null;}
+    })();return refreshPromise;
+  }
+  function eventList(){return items.filter(x=>chosen&&norm(x.name)===norm(chosen));}
+  const fmt=d=>new Intl.DateTimeFormat('vi-VN',{dateStyle:'medium',timeStyle:'short'}).format(d);
+  function renderCalendar(){list.replaceChildren();const relevant=eventList();exp.disabled=!relevant.length;
+    if(!chosen)return;
+    if(!relevant.length){const p=document.createElement('p');p.textContent='Không có lịch nhắc cho nhân viên này.';list.append(p);return;}
+    const h=document.createElement('p');h.textContent=`${chosen}: ${relevant.length} lịch nhắc. Chỉ lịch TRỄ HÔM NAY chưa xem mới hiện popup khi vào ứng dụng.`;list.append(h);
+    relevant.forEach(it=>{
+      const entry=document.createElement('div');entry.className='cal-entry';
+      const title=document.createElement('div');title.className='cal-entry-title';title.textContent=(it.kind==='checklist'?'☑️ ':'🗓️ ')+it.title;
+      const meta=document.createElement('div');meta.className='cal-entry-meta';meta.textContent=fmt(validDate(it.time))+(it.repeat==='none'?'':' • 🔁 '+({daily:'Hằng ngày',weekly:'Hằng tuần',monthly:'Hằng tháng'}[it.repeat]));
+      const b=document.createElement('button');b.type='button';b.textContent='Thêm vào Google Calendar';b.addEventListener('click',()=>googleCalendar(it));
+      entry.append(title,meta,b);list.append(entry);
+    });
+  }
+  e('calRefresh').addEventListener('click',()=>refresh({autoCheck:false}));
+  const localStamp=d=>String(d.getFullYear())+two(d.getMonth()+1)+two(d.getDate())+'T'+two(d.getHours())+two(d.getMinutes())+two(d.getSeconds());
+  const utcStamp=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  function description(it){return `Nhân viên: ${it.name}\nBộ phận: ${it.department}\nMục tiêu: ${it.objective}\nKết quả kỳ vọng: ${it.expectedResult}\nXem tại https://duocphamideco.github.io/nhackehoach-checklist-mobile/`;}
+  function escapeIcs(s){return String(s||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');}
+  function vevent(it){
+    const start=validDate(it.time),end=new Date(start.getTime()+15*60000);
+    const rr={daily:'RRULE:FREQ=DAILY',weekly:'RRULE:FREQ=WEEKLY',monthly:'RRULE:FREQ=MONTHLY'}[it.repeat];
+    const uid=encodeURIComponent(it.id).replace(/%/g,'')+'@ideco-calendar';
+    return ['BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+utcStamp(new Date()),'DTSTART:'+localStamp(start),'DTEND:'+localStamp(end),
+      'SUMMARY:'+escapeIcs('IDECO – '+it.title),'DESCRIPTION:'+escapeIcs(description(it)),rr,
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+escapeIcs('IDECO sắp tới lịch: '+it.title),'TRIGGER:-PT10M','END:VALARM',
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+escapeIcs('IDECO đã đến giờ: '+it.title),'TRIGGER:PT0M','END:VALARM',
+      'END:VEVENT'].filter(Boolean).join('\r\n');
+  }
+  exp.addEventListener('click',()=>{
+    const relevant=eventList();if(!relevant.length)return;
+    const data=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//IDECO PHARMA//Mobile Hub Calendar//VI','CALSCALE:GREGORIAN','METHOD:PUBLISH',...relevant.map(vevent),'END:VCALENDAR',''].join('\r\n');
+    const blob=new Blob(['\ufeff'+data],{type:'text/calendar;charset=utf-8'}),url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='IDECO_LICH_NHAC_'+Date.now()+'.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);
+    say(`Đã xuất ${relevant.length} lịch của ${chosen}. Cần tự nhập file .ics vào ứng dụng Lịch để điện thoại thông báo lúc web đóng.`);
+  });
+  function googleCalendar(it){
+    const start=validDate(it.time),end=new Date(start.getTime()+15*60000);
+    const base='https://calendar.google.com/calendar/render?action=TEMPLATE';
+    const url=base+'&text='+encodeURIComponent('IDECO – '+it.title)+'&dates='+encodeURIComponent(localStamp(start)+'/'+localStamp(end))+'&ctz='+encodeURIComponent('Asia/Ho_Chi_Minh')+'&details='+encodeURIComponent(description(it));
+    window.location.assign(url);
+  }
+  // Automatically check upon entry with saved login and after user signs in.
+  function autoCheck(){if(locked())return;lastAutoCheck=Date.now();refresh({autoCheck:true});}
+  document.addEventListener('ideco:logged-in',autoCheck);
+  document.addEventListener('ideco:logged-out',()=>{closeLate();closeCalendar();});
+  if(!locked())autoCheck();
+  // React to phone returning to the page; do not poll in background or when hidden.
+  let hiddenAt=0;
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){hiddenAt=Date.now();return;}
+    if(!locked()&&(hiddenAt&&Date.now()-hiddenAt>30000))autoCheck();
+  });
+  // While the website is open, keep the badge correct as time passes.
+  setInterval(()=>{
+    if(locked()||document.hidden||!loaded)return;
+    renderLate();updateBadge();
+    if(Date.now()-lastAutoCheck>300000){lastAutoCheck=Date.now();refresh({autoCheck:false});}
+  },60000);
+})();
+</script>
+
 </body>
 </html>
