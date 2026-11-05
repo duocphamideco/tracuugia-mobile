@@ -1,5 +1,5 @@
 /* Tăng VERSION khi thay đổi các tệp PWA. Không lưu dữ liệu giá hay HTML ứng dụng. */
-const VERSION = 'v2';
+const VERSION = 'v3'; // v3: thêm bộ biểu tượng IDECO WEB HUB (icons/ trước đây bị thiếu → không cài được)
 const PREFIX = 'ideco-tracuugia-pwa-';
 const CACHE = PREFIX + VERSION;
 const base = self.registration.scope;

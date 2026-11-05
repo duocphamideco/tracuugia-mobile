@@ -1,0 +1,25 @@
+IDECO WEB HUB — BỘ TỆP CÀI ỨNG DỤNG LÊN ĐIỆN THOẠI (repo tracuugia-mobile)
+
+VÌ SAO TRƯỚC ĐÂY KHÔNG CÓ LOGO / KHÔNG CÀI ĐƯỢC
+• manifest.webmanifest và sw.js trỏ tới thư mục icons/ nhưng thư mục này CHƯA CÓ trên GitHub (lỗi 404)
+  → Chrome/iPhone không có logo để đặt lên màn hình chính.
+
+CÁCH TẢI LÊN GITHUB (repo duocphamideco/tracuugia-mobile, thư mục gốc)
+1. Tải lên cả thư mục  icons/  (6 tệp PNG) — giữ đúng tên thư mục "icons".
+2. Thay  manifest.webmanifest  và  sw.js  bằng bản trong gói này.
+3. Giữ nguyên index.html và offline.html đang có.
+
+KIỂM TRA index.html (bản "sửa lỗi mật khẩu" của anh)
+Trong <head> phải có 4 dòng sau (bản trên GitHub hiện đã có — nếu thiếu thì dán thêm):
+<link rel="manifest" href="/tracuugia-mobile/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/tracuugia-mobile/icons/favicon-48.png">
+<link rel="apple-touch-icon" href="/tracuugia-mobile/icons/icon-180.png">
+<meta name="apple-mobile-web-app-title" content="IDECO WEB HUB">
+
+Nên dán thêm dòng này ngay trước </body> (để mất mạng thì app hiện trang "offline" thay vì trang trắng):
+<script>if('serviceWorker' in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/tracuugia-mobile/sw.js').catch(function(){});});</script>
+
+CÀI TRÊN ĐIỆN THOẠI
+• Android: Chrome → https://duocphamideco.github.io/tracuugia-mobile/ → ⋮ → "Cài đặt ứng dụng".
+• iPhone: Safari → cùng địa chỉ → nút Chia sẻ → "Thêm vào MH chính" → "Thêm".
+• Máy đã lỡ thêm biểu tượng cũ (không có logo): xóa biểu tượng cũ rồi cài lại.
