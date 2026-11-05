@@ -1,19 +1,40 @@
 {
-  "id": "/tracuugia-mobile/",
-  "name": "IDECO WEB HUB",
-  "short_name": "IDECO WEB HUB",
-  "description": "IDECO • Quản lý nhanh trên Mobile — mở nhanh các ứng dụng công ty.",
+  "id": "./",
+  "name": "IDECO Mobile Hub",
+  "short_name": "IDECO Hub",
+  "description": "Trung tâm ứng dụng nội bộ IDECO, biểu tượng IDECO WEB HUB trên Android và iOS.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#ffffff",
+  "orientation": "any",
+  "background_color": "#f5f6f8",
   "theme_color": "#ef3123",
+  "prefer_related_applications": false,
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "./icons/ideco-webhub-192-v3.3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/ideco-webhub-512-v3.3.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/ideco-webhub-maskable-192-v3.3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/ideco-webhub-maskable-512-v3.3.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

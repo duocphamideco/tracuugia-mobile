@@ -1,0 +1,56 @@
+IDECO MOBILE HUB — PWA CHO ANDROID VÀ iOS (v3.2)
+=================================================
+Nguồn gốc: IDECO_MOBILE_HUB_SUA_LOI_MAT_KHAU.html được cung cấp.
+Không chỉnh sửa mật khẩu, danh sách menu, chức năng xem ứng dụng, dữ liệu localStorage hoặc link ERP.
+
+CÁCH TRIỂN KHAI TRÊN GITHUB PAGES
+1. Mở repository đang chạy IDECO Mobile Hub (KHÔNG phải repository khác).
+2. Sao lưu index.html hiện tại trước khi ghi đè.
+3. Upload TOÀN BỘ các file/thư mục của ZIP này vào đúng thư mục đang phục vụ website:
+   index.html
+   manifest.webmanifest
+   sw.js
+   apple-touch-icon.png
+   pwa-check.html
+   icons/ (cả thư mục, giữ nguyên tên và chữ thường)
+4. Giữ các đường dẫn tương đối như cung cấp. Không đặt trong thư mục con riêng nếu index.html nằm ở thư mục gốc.
+5. Chờ GitHub Pages hiển thị phiên bản mới, sau đó mở https://<ten-tai-khoan>.github.io/<ten-repo>/pwa-check.html
+   và kiểm tra 6 kết quả. Mục Service worker sẽ chuyển thành 'đã đăng ký' sau khi mở trang chủ.
+6. Nếu điện thoại vẫn dùng biểu tượng cũ, xóa shortcut/app IDECO cũ và cài lại sau khi làm mới Chrome/Safari.
+
+ANDROID
+- Mở website trực tiếp bằng Chrome (không phải trình duyệt nhúng Zalo/Facebook).
+- Có thể bấm nút 'Cài IDECO Hub' trong trang hoặc menu ⋮ → 'Cài đặt ứng dụng' / 'Thêm vào màn hình chính'.
+- Nếu không hiện nhắc cài đặt ngay: kiểm tra điều kiện HTTPS, các tệp trên đường dẫn, quy tắc trình duyệt.
+
+IPHONE / IPAD (iOS/iPadOS)
+- Mở website bằng Safari.
+- Chạm Chia sẻ (có thể nằm trong menu trang) → Thêm vào Màn hình chính → bật 'Mở dưới dạng ứng dụng' nếu có → Thêm.
+- iOS không có API để trang web tự khởi chạy hộp thoại cài đặt.
+- Biểu tượng chuẩn được lấy từ apple-touch-icon, ứng dụng mở theo chế độ standalone.
+
+LƯU Ý
+- PWA này chỉ lưu lớp giao diện Hub để có thể mở khi mất mạng; dữ liệu ERP và các ứng dụng ở domain khác vẫn cần mạng.
+- Nếu thêm PWA trên iOS, dữ liệu đăng nhập localStorage có thể độc lập với phiên Safari nên có thể yêu cầu đăng nhập lại lần đầu.
+- Đăng nhập trong HTML là khóa giao diện phía client, KHÔNG thay cho xác thực máy chủ nếu Hub chứa dữ liệu nhạy cảm.
+- Chỉ tải file HTML mà không tải manifest, icons và sw sẽ KHÔNG tạo được PWA hoàn chỉnh.
+- Việc PWA Android xuất hiện hộp thoại cài đặt còn phụ thuộc Chrome/thiết bị, không thể ép bằng mã nguồn.
+
+KIỂM TRA KỸ THUẬT
+- Manifest start_url, scope và các link icon là tương đối ('./') nên dùng được ở nhiều đường dẫn repo trên GitHub Pages.
+- Logo PNG 192, 512 (Android), maskable (Android), 120/152/167/180 (iOS/iPadOS), favicon.
+- Service worker chỉ cache shell tĩnh cùng nguồn; không thu thập/mở/can thiệp các ứng dụng, ERP hoặc API khác.
+
+
+=== CẬP NHẬT LOGO CHÍNH XÁC v3.3 (05/11/2026) ===
+- Đã dùng CHÍNH XÁC ảnh anh gửi: LOGO(1).png, gồm khung đỏ, cánh buồm đỏ, chữ IDECO WEB HUB.
+- Đổi hình đại diện Android 192/512, adaptive maskable và biểu tượng iOS 120/152/167/180.
+- Đổi cả logo màn hình đăng nhập và thanh tiêu đề ứng dụng; giữ logic xác thực và dữ liệu.
+- Đã tạo các file logo có tên v3.3 để tránh máy lấy lại biểu tượng cũ trong bộ nhớ đệm.
+- Tải TOÀN BỘ nội dung ZIP lên cùng thư mục GitHub Pages đang chạy IDECO Mobile Hub.
+- Mở pwa-check.html trên website và xác nhận mọi mục đều OK.
+- Nếu màn hình chính vẫn hiển thị logo cũ: xóa biểu tượng/cài đặt ứng dụng IDECO Hub cũ,
+  đóng/mở lại Chrome hoặc Safari, tải lại website và cài lại lên màn hình chính.
+- Android Chrome: menu ⋮ > Cài đặt ứng dụng hoặc Thêm vào màn hình chính.
+- iPhone Safari: Chia sẻ > Thêm vào Màn hình chính (tùy phiên bản iOS).
+- Không thể tự kiểm chứng cài đặt trên điện thoại thật từ môi trường xây dựng này.

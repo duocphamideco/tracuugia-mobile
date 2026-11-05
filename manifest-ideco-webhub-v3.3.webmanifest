@@ -1,0 +1,40 @@
+{
+  "id": "./",
+  "name": "IDECO Mobile Hub",
+  "short_name": "IDECO Hub",
+  "description": "Trung tâm ứng dụng nội bộ IDECO, biểu tượng IDECO WEB HUB trên Android và iOS.",
+  "lang": "vi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f6f8",
+  "theme_color": "#ef3123",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icons/ideco-webhub-192-v3.3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/ideco-webhub-512-v3.3.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/ideco-webhub-maskable-192-v3.3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/ideco-webhub-maskable-512-v3.3.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
