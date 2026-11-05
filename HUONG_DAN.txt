@@ -1,0 +1,21 @@
+IDECO WEB HUB — BẢN TẠO LẠI TỪ FILE ANH GỬI
+
+Nguồn: index (1).html — ứng dụng Kế hoạch & Checklist.
+Biểu tượng: LOGO.png — IDECO WEB HUB.
+Địa chỉ theo yêu cầu: https://duocphamideco.github.io/tracuugia-mobile/
+
+1. Sao lưu bản website hiện tại.
+2. Giải nén ZIP, tải index.html, manifest.webmanifest, pwa-install.js, sw.js, offline.html và thư mục icons vào cùng thư mục nguồn GitHub Pages. Thay các tệp cũ. Không tải cả ZIP, không tạo thêm thư mục bao ngoài.
+3. Chờ Pages triển khai thành công, mở website và tải lại trang. index.html đã ghép sẵn, không cần chèn thêm mã.
+4. Android: Chrome → nút Cài IDECO WEB HUB trên điện thoại hoặc menu ⋮ → Cài đặt ứng dụng / Thêm vào màn hình chính.
+5. iPhone: Safari → Chia sẻ → Thêm vào Màn hình chính → bật Mở dưới dạng ứng dụng web nếu có → Thêm.
+
+Đã giữ nguyên mã xử lý kế hoạch, checklist, lưu dữ liệu và địa chỉ Firebase trong file nguồn. Đã đổi tiêu đề trang, biểu tượng và bổ sung PWA. Nút cài nằm bên dưới phần đầu trang.
+
+Bản này thay thế ứng dụng trang chủ bằng Kế hoạch & Checklist đúng như file mới, không phải màn hình danh sách ứng dụng của gói trước.
+
+Kiểm tra sau đăng: mở từ biểu tượng, chọn nhân viên/bộ phận, tải dữ liệu, mở các tab, kiểm tra thao tác lưu theo quy trình của anh. Chưa thử ghi dữ liệu vào Firebase thật.
+
+App cần Internet để tải và lưu dữ liệu. Khi mất mạng, PWA chỉ hiện trang thông báo kết nối lại; không thêm khả năng đồng bộ ngoại tuyến. Đã kiểm tra cú pháp và cấu trúc gói, chưa triển khai hoặc kiểm thử cài trên thiết bị thật.
+
+Nếu đã cài bản cũ: đóng tất cả cửa sổ app rồi mở lại. Tên/icon có thể cập nhật chậm; có thể cần gỡ biểu tượng và cài lại sau khi đảm bảo dữ liệu cần giữ đã đồng bộ. Không xóa dữ liệu trình duyệt khi còn thay đổi chưa lưu.

@@ -1,0 +1,8 @@
+Đã ghép sẵn vào index.html. Chỉ tham khảo khi dùng HTML khác:
+
+<link rel="manifest" href="/tracuugia-mobile/manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="IDECO WEB HUB">
+<link rel="apple-touch-icon" href="/tracuugia-mobile/icons/icon-180.png">
+<script src="/tracuugia-mobile/pwa-install.js" defer></script>
