@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ef3123" />
-<!-- IDECO WEB HUB PWA v3.5 - same install architecture as HUYEN TRO LY -->
+<!-- IDECO WEB HUB PWA v3.6 - added De xuat & Duyet menu -->
 <meta name="description" content="IDECO WEB HUB – trung tâm ứng dụng nội bộ trên Android và iOS" />
 <meta name="application-name" content="IDECO WEB HUB" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -444,6 +444,13 @@ const defaults = [
     url: "https://duocphamideco.github.io/kehoach-checklist-mobile/",
     icon: "🗓️",
     target: "_hub"
+  },
+  {
+    id: "de-xuat-duyet-mobile",
+    name: "ĐỀ XUẤT & DUYỆT",
+    url: "https://duocphamideco.github.io/duyetvanban-mobile/",
+    icon: "📝",
+    target: "_hub"
   }
 ];
 
@@ -503,6 +510,18 @@ function loadApps() {
       }
       source = source.map(a => a && {...a, target: "_hub"});
       localStorage.setItem(homeMigrationKey, "1");
+    }
+    // Thêm menu ĐỀ XUẤT & DUYỆT một lần trên các thiết bị đã lưu danh sách.
+    // Không ghi đè menu cũ, không tạo mục trùng URL, cho phép người dùng xóa sau này.
+    const deXuatMigrationKey = "ideco_mobile_hub_added_de_xuat_duyet_v1";
+    if (!localStorage.getItem(deXuatMigrationKey)) {
+      const deXuatApp = defaults.find(a => a.id === "de-xuat-duyet-mobile");
+      const normalizeAppUrl = url => String(url || "").trim().replace(/\/+$/, "").toLowerCase();
+      if (!source.some(a => a && (a.id === deXuatApp.id ||
+          normalizeAppUrl(a.url) === normalizeAppUrl(deXuatApp.url)))) {
+        source = [...source, {...deXuatApp}];
+      }
+      localStorage.setItem(deXuatMigrationKey, "1");
     }
   } catch(e) {
     // localStorage có thể bị chặn: vẫn hiển thị menu mặc định.

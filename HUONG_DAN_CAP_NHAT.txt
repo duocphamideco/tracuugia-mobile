@@ -1,11 +1,15 @@
-IDECO WEB HUB v3.5 – CÀI THÀNH ỨNG DỤNG FULL MÀN HÌNH (ANDROID + IOS)
+IDECO WEB HUB v3.6 – CÀI THÀNH ỨNG DỤNG FULL MÀN HÌNH (ANDROID + IOS)
 
-BẢN GỐC: IDECO WEB HUB v3.4 do anh gửi.
+BẢN GỐC: APP CHUẨN IDECO HUB.zip (IDECO WEB HUB v3.5) do anh gửi.
+CẬP NHẬT: Thêm menu 📝 ĐỀ XUẤT & DUYỆT → https://duocphamideco.github.io/duyetvanban-mobile/
+Menu mới tự thêm vào danh sách đã lưu trên điện thoại/máy tính, không làm mất các menu đã thiết lập.
+Mặc định menu mở trong IDECO HUB; nếu trang ngoài chặn nhúng, bấm "MỞ TRỰC TIẾP".
+
 CƠ CHẾ CHUẨN THAM KHẢO: HUYỀN TRỢ LÝ (manifest.json + sw.js + các icon ở thư mục gốc).
 LOGO: dùng chính ảnh LOGO(2).png anh gửi, không thay thế thương hiệu.
 
 BƯỚC 1: Sao lưu index.html cũ trong repository đang chạy IDECO WEB HUB.
-BƯỚC 2: Giải nén ZIP. Chọn TẤT CẢ 10 file trong ZIP (không kéo nguyên ZIP), tải vào ĐÚNG THƯ MỤC đang có index.html của IDECO WEB HUB trên GitHub.
+BƯỚC 2: Giải nén ZIP. Chọn TẤT CẢ 11 file trong ZIP (bao gồm tệp hướng dẫn này nếu muốn lưu) (không kéo nguyên ZIP), tải vào ĐÚNG THƯ MỤC đang có index.html của IDECO WEB HUB trên GitHub.
 BƯỚC 3: GitHub → Add file → Upload files → chọn file, xác nhận ghi đè file cũ (nếu có) → Commit changes.
 BƯỚC 4: Chờ GitHub Pages triển khai, mở: https://<website-hub-cua-anh>/pwa-check.html
        Các mục HTTPS, manifest.json, logo và service worker phải OK khi mở trang chính.
@@ -23,4 +27,4 @@ LƯU Ý:
 - Nếu GitHub Pages trỏ nhầm repository / nhầm thư mục, hoặc chưa tải đầy đủ các file, Chrome sẽ chỉ tạo shortcut có thanh địa chỉ; không có cách ép shortcut thành ứng dụng chỉ bằng HTML.
 - Các ứng dụng/web bên ngoài mở ra khỏi IDECO WEB HUB có thể chuyển qua trình duyệt: "standalone" chỉ áp dụng trong phạm vi của PWA.
 - Service worker chỉ quản lý shell WEB HUB; không lưu cache dữ liệu ERP, Firebase, AI, ứng dụng khác.
-- Giữ nguyên logic đăng nhập, localStorage, mục ứng dụng, thao tác mở app trong index.html v3.4.
+- Giữ nguyên logic đăng nhập, localStorage, các menu cũ và thao tác mở ứng dụng.
