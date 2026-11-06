@@ -1,0 +1,36 @@
+IDECO WEB HUB — BẢN KHẮC PHỤC PWA ANDROID / iOS v3.4 (05/11/2026)
+
+NGUYÊN NHÂN Ở BẢN CŨ:
+1) HTML dùng đường dẫn ./icons/ideco-webhub-192-v3.3.png. Nếu thiếu thư mục icons hoặc upload sai vị trí, header không có logo.
+2) HTML tham chiếu manifest-ideco-webhub-v3.3.webmanifest và nhiều file logo tên v3.3. Nếu chỉ upload index.html, Chrome sẽ không tìm thấy biểu tượng và báo không cài được.
+
+BẢN MỚI KHẮC PHỤC:
+- Logo giao diện đăng nhập và phần đầu ứng dụng được NHÚNG NGAY vào index.html; không phụ thuộc file ảnh riêng.
+- TẤT CẢ file nằm cùng thư mục, không có thư mục con icons cần upload.
+- Tên file Android/iOS có hậu tố v34 để tránh Chrome dùng icon cũ.
+- Manifest trỏ đến các biểu tượng thực tại cùng cấp với index.html.
+- Giữ nguyên logic đăng nhập, dữ liệu localStorage, menu và ERP từ v3.3.
+- Service Worker v3.4 không hỏng bước cài chỉ vì thiếu file precache.
+
+CẬP NHẬT TRÊN GITHUB (KHÔNG UPLOAD ZIP TRỰC TIẾP):
+1. Giải nén ZIP trên máy tính.
+2. Vào ĐÚNG repository GitHub Pages đang chạy IDECO Mobile Hub. Đến thư mục chứa index.html hiện tại (như ảnh chụp).
+3. Chọn Add file -> Upload files. Kéo thả CHỌN TẤT CẢ CÁC FILE trong ZIP (không phải ZIP), bao gồm index.html, manifest.webmanifest, sw.js, PNG, pwa-check.html.
+4. Trong bảng thay đổi, xác minh index.html / manifest.webmanifest / sw.js được GHI ĐÈ.
+5. Bấm Commit changes trên nhánh main. Đợi GitHub Pages triển khai, sau đó mở https://<domain>/<repo>/pwa-check.html cùng thư mục index.html.
+6. Nếu dòng nào hiển thị LỖI, thường do thiếu file trong GitHub hoặc GitHub Pages chưa triển khai xong. Upload đúng file rồi kiểm tra lại.
+
+ANDROID:
+- Mở trang bằng Chrome, không mở trong Zalo/Facebook/in-app browser.
+- Xóa biểu tượng shortcut IDECO cũ nếu có.
+- Sau khi pwa-check.html kiểm tra toàn bộ file OK, đóng tab, tải lại website, menu Chrome (⋮) -> Cài đặt ứng dụng / Thêm vào màn hình chính.
+- Nếu Chrome tiếp tục báo không thể cài, có thể xóa dữ liệu trang trong Cài đặt trang web của Chrome rồi tải lại. Chỉ làm nếu đã đồng bộ/ghi lại dữ liệu vì xóa dữ liệu site làm mất phiên đăng nhập và mọi dữ liệu localStorage chưa đồng bộ.
+
+iOS:
+- Mở trang bằng Safari -> Chia sẻ -> Thêm vào Màn hình chính, chọn mở dưới dạng ứng dụng nếu có.
+- Xóa shortcut cũ, thêm lại nếu muốn đổi icon.
+
+QUAN TRỌNG:
+* Logo trang web được nhúng; NHƯNG để icon cài đặt trên điện thoại hiển thị, bắt buộc upload file PNG và manifest.webmanifest.
+* Nếu GitHub Pages deploy từ thư mục /docs thay vì root, tải các file cùng cấp với index.html của trang được phục vụ.
+* Bản này đã được kiểm tra cục bộ, chưa thể xác minh trang GitHub Pages đang vận hành của anh hoặc cài trên điện thoại thật.

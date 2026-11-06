@@ -1,42 +1,35 @@
-/* IDECO Mobile Hub v3.3: only cache this app shell, never ERP/other websites or dynamic data. */
-const CACHE_NAME = 'ideco-mobile-hub-shell-v3.3';
-const APP_SHELL = [
-  './index.html',
-  './manifest-ideco-webhub-v3.3.webmanifest',
-  './apple-touch-ideco-webhub-v3.3.png',
-  './icons/ideco-webhub-192-v3.3.png',
-  './icons/ideco-webhub-512-v3.3.png',
-  './icons/ideco-webhub-maskable-192-v3.3.png',
-  './icons/ideco-webhub-maskable-512-v3.3.png',
-  './icons/ideco-webhub-ios-180-v3.3.png'
-];
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
-  );
+/* IDECO WEB HUB v3.4. Network first for the hub itself, no interfering with linked websites. */
+const SHELL_CACHE = 'ideco-web-hub-v3.4';
+const HOME = new URL('./index.html', self.registration.scope).href;
+self.addEventListener('install', e => {
+  // Never let an incorrectly uploaded logo block service worker installation.
+  e.waitUntil(self.skipWaiting());
 });
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.filter(name => name.startsWith('ideco-mobile-hub-shell-') && name !== CACHE_NAME)
-        .map(name => caches.delete(name))
-    )).then(() => self.clients.claim())
-  );
+self.addEventListener('activate', e => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k =>
+      (k.startsWith('ideco-web-hub-') || k.startsWith('ideco-mobile-hub-shell-'))
+      && k !== SHELL_CACHE).map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
-self.addEventListener('fetch', event => {
-  const request = event.request;
-  if (request.method !== 'GET' || request.mode !== 'navigate') return;
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-  const scopeUrl = new URL(self.registration.scope);
-  if (url.pathname !== scopeUrl.pathname && url.pathname !== scopeUrl.pathname + 'index.html') return;
-  event.respondWith(
-    fetch(request).catch(async () => {
-      const cache = await caches.open(CACHE_NAME);
-      const saved = await cache.match('./index.html');
-      return saved || Response.error();
-    })
-  );
+self.addEventListener('fetch', e => {
+  const r = e.request;
+  if (r.method !== 'GET' || r.mode !== 'navigate') return;
+  const u = new URL(r.url), scope = new URL(self.registration.scope);
+  if (u.origin !== scope.origin) return;
+  if (u.pathname !== scope.pathname && u.pathname !== new URL('./index.html', scope).pathname) return;
+  e.respondWith((async () => {
+    try {
+      const response = await fetch(r);
+      if (response.ok) {
+        const copy = response.clone();
+        e.waitUntil(caches.open(SHELL_CACHE).then(c => c.put(HOME, copy)).catch(() => {}));
+      }
+      return response;
+    } catch (err) {
+      return (await caches.match(HOME)) || Response.error();
+    }
+  })());
 });
