@@ -4,19 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ef3123" />
-<!-- IDECO WEB HUB PWA v3.4 - all support files are at the same folder level as index.html -->
-<meta name="description" content="Trung tâm ứng dụng nội bộ IDECO trên Android và iOS" />
-<meta name="application-name" content="IDECO Mobile Hub" />
+<!-- IDECO WEB HUB PWA v3.5 - same install architecture as HUYEN TRO LY -->
+<meta name="description" content="IDECO WEB HUB – trung tâm ứng dụng nội bộ trên Android và iOS" />
+<meta name="application-name" content="IDECO WEB HUB" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="IDECO WEB HUB" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<link rel="manifest" href="./manifest.webmanifest?v=3.4" />
-<link rel="icon" type="image/png" sizes="32x32" href="./ideco-favicon-32-v34.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="./ideco-icon-192-v34.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="./ideco-ios-180-v34.png" />
-<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <title>IDECO Mobile Hub</title>
 <style>
 :root {
@@ -709,7 +707,7 @@ render();
         '<ol><li>Mở IDECO Hub trực tiếp bằng <strong>Chrome</strong>.</li>'+
         '<li>Chạm menu <strong>⋮</strong> của Chrome.</li>'+
         '<li>Chọn <strong>Cài đặt ứng dụng</strong> hoặc <strong>Thêm vào màn hình chính</strong> rồi xác nhận.</li></ol>'+
-        '<p class="pwaNote">Nếu Chrome báo không thể cài, hãy chắc rằng đã tải đủ các file tại thư mục gốc: index.html, manifest.webmanifest, sw.js, ideco-icon-192-v34.png, ideco-icon-512-v34.png và các PNG khác trong ZIP. Kiểm tra trực tiếp pwa-check.html để phát hiện file thiếu. Mở lại sau khi website cập nhật.</p>';
+        '<p class="pwaNote">Nếu Chrome báo không thể cài, hãy chắc rằng đã tải đủ các file tại thư mục gốc: index.html, manifest.json, sw.js, icon-192.png, icon-512.png, apple-touch-icon.png và các PNG khác trong ZIP. Kiểm tra trực tiếp pwa-check.html để phát hiện file thiếu. Mở lại sau khi website cập nhật.</p>';
     } else {
       steps.innerHTML = '<p>Mở IDECO Hub trên <strong>Chrome Android</strong> để cài qua menu ⋮ → Cài đặt ứng dụng, hoặc <strong>Safari iPhone/iPad</strong> → Chia sẻ → Thêm vào Màn hình chính.</p>';
     }
@@ -739,7 +737,7 @@ render();
   toggleInstallButtons();
   if('serviceWorker' in navigator && window.isSecureContext){
     window.addEventListener('load',() => {
-      navigator.serviceWorker.register('./sw.js?v=3.4',{scope:'./',updateViaCache:'none'})
+      navigator.serviceWorker.register('sw.js',{scope:'./',updateViaCache:'none'})
         .catch(error => console.warn('IDECO Hub service worker registration failed:',error));
     });
   }

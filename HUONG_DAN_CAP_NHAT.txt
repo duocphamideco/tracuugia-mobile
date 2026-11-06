@@ -1,21 +1,26 @@
-IDECO WEB HUB — BỘ TỆP HOÀN CHỈNH CHO REPO tracuugia-mobile
+IDECO WEB HUB v3.5 – CÀI THÀNH ỨNG DỤNG FULL MÀN HÌNH (ANDROID + IOS)
 
-LƯU Ý QUAN TRỌNG
-• Sáng 05/11, index.html trên repo đã bị thay bằng app "Kế hoạch & Checklist" (lần "Add files via upload").
-  index.html trong gói này là ĐÚNG bản IDECO Mobile Hub cuối cùng (31/10 — "Ứng dụng của tôi", 8 ứng dụng,
-  đăng nhập mật khẩu có nút 👁), đã gắn sẵn logo IDECO WEB HUB để cài lên điện thoại.
+BẢN GỐC: IDECO WEB HUB v3.4 do anh gửi.
+CƠ CHẾ CHUẨN THAM KHẢO: HUYỀN TRỢ LÝ (manifest.json + sw.js + các icon ở thư mục gốc).
+LOGO: dùng chính ảnh LOGO(2).png anh gửi, không thay thế thương hiệu.
 
-TẢI LÊN GITHUB (repo duocphamideco/tracuugia-mobile, thư mục gốc — không tạo thư mục bao ngoài)
-1. index.html             → thay bản hiện tại
-2. manifest.webmanifest   → thay
-3. sw.js                  → thay (phiên bản v3)
-4. offline.html           → giữ / thay đều được
-5. Thư mục icons/ (6 ảnh) → tải lên, giữ đúng tên thư mục "icons"
-6. pwa-install.js         → không còn dùng, có thể xóa
+BƯỚC 1: Sao lưu index.html cũ trong repository đang chạy IDECO WEB HUB.
+BƯỚC 2: Giải nén ZIP. Chọn TẤT CẢ 10 file trong ZIP (không kéo nguyên ZIP), tải vào ĐÚNG THƯ MỤC đang có index.html của IDECO WEB HUB trên GitHub.
+BƯỚC 3: GitHub → Add file → Upload files → chọn file, xác nhận ghi đè file cũ (nếu có) → Commit changes.
+BƯỚC 4: Chờ GitHub Pages triển khai, mở: https://<website-hub-cua-anh>/pwa-check.html
+       Các mục HTTPS, manifest.json, logo và service worker phải OK khi mở trang chính.
+BƯỚC 5: Xóa biểu tượng lối tắt cũ trên điện thoại nếu đang có; mở lại trang IDECO WEB HUB bằng Chrome Android, vào menu ⋮ → "Cài đặt ứng dụng" (không phải "Tạo lối tắt").
+       Mở từ biểu tượng màn hình chính. Bản cài đúng chạy standalone, KHÔNG hiển thị ô địa chỉ web.
+BƯỚC 6 (iPhone): mở bằng Safari → Chia sẻ → Thêm vào Màn hình chính → bật "Mở dưới dạng ứng dụng" nếu Safari có tùy chọn.
 
-Chờ GitHub Pages cập nhật (1–2 phút), mở lại trang và tải lại (kéo xuống / F5).
+CẤU TRÚC ZIP (các tệp phải nằm cùng cấp):
+    index.html, manifest.json, sw.js, icon-192.png, icon-512.png,
+    icon-maskable-192.png, icon-maskable-512.png, apple-touch-icon.png,
+    favicon-48.png, pwa-check.html.
 
-CÀI TRÊN ĐIỆN THOẠI
-• Android: Chrome → https://duocphamideco.github.io/tracuugia-mobile/ → ⋮ → "Cài đặt ứng dụng".
-• iPhone: Safari → cùng địa chỉ → Chia sẻ → "Thêm vào MH chính" → "Thêm".
-• Máy đã thêm biểu tượng cũ (không có logo): xóa biểu tượng cũ rồi cài lại.
+LƯU Ý:
+- Các file manifest.webmanifest và biểu tượng v3.4 cũ có thể giữ nguyên nhưng không còn được sử dụng vì index.html mới chỉ tham chiếu manifest.json.
+- Nếu GitHub Pages trỏ nhầm repository / nhầm thư mục, hoặc chưa tải đầy đủ các file, Chrome sẽ chỉ tạo shortcut có thanh địa chỉ; không có cách ép shortcut thành ứng dụng chỉ bằng HTML.
+- Các ứng dụng/web bên ngoài mở ra khỏi IDECO WEB HUB có thể chuyển qua trình duyệt: "standalone" chỉ áp dụng trong phạm vi của PWA.
+- Service worker chỉ quản lý shell WEB HUB; không lưu cache dữ liệu ERP, Firebase, AI, ứng dụng khác.
+- Giữ nguyên logic đăng nhập, localStorage, mục ứng dụng, thao tác mở app trong index.html v3.4.

@@ -1,56 +1,26 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kiểm tra IDECO WEB HUB PWA v3.4</title><style>
-:root{font-family:system-ui,Arial,sans-serif;color:#202124;background:#f5f6f8}*{box-sizing:border-box}body{margin:0;padding:18px}main{max-width:700px;margin:auto}header{background:linear-gradient(135deg,#dc1d15,#f54b3c);border-radius:20px;padding:24px;color:white}h1{font-size:22px;margin:0 0 8px}p{line-height:1.5}button,a{font:inherit}button{border:0;border-radius:12px;padding:12px 20px;background:#d31e16;color:white;font-weight:750;cursor:pointer}li{list-style:none;background:white;margin:9px 0;padding:14px;border-radius:12px;overflow-wrap:anywhere}ul{padding:0}.ok{color:#197346;font-weight:750}.bad{color:#bf1b1b;font-weight:750}.warn{color:#956408;font-weight:750}small{display:block;color:#69717b;margin-top:5px}footer{padding-top:20px}
-</style></head><body><main><header><h1>🔎 Kiểm tra cài đặt IDECO WEB HUB v3.4</h1><p>Kiểm tra URL file thật đang được phục vụ từ GitHub Pages. Nếu xuất hiện lỗi đỏ, thiếu file hoặc đường dẫn sai sẽ làm Chrome không nhận biểu tượng.</p></header><p><strong>Website đang kiểm tra:</strong> <span id="base"></span></p><button id="test">Kiểm tra lại</button><ul id="results" aria-live="polite"></ul><footer><a href="./index.html">Trở về IDECO Hub</a></footer></main>
-<script>
-const files = [
- ['Trang chủ','index.html','html'],
- ['Manifest PWA','manifest.webmanifest','json'],
- ['Logo Android 192','ideco-icon-192-v34.png','image'],
- ['Logo Android 512','ideco-icon-512-v34.png','image'],
- ['Logo maskable 192','ideco-maskable-192-v34.png','image'],
- ['Logo maskable 512','ideco-maskable-512-v34.png','image'],
- ['Logo iOS','ideco-ios-180-v34.png','image'],
- ['Apple touch icon dự phòng','apple-touch-icon.png','image'],
- ['Service Worker','sw.js','script']
-];
-const list=document.getElementById('results');
-const base = new URL('./',location.href);document.getElementById('base').textContent=base.href;
-function add(title,status,msg=''){
- const li=document.createElement('li'),b=document.createElement('span'),sub=document.createElement('small');
- b.className=status==='OK'?'ok':status==='LỖI'?'bad':'warn';b.textContent=`${status} — ${title}`;
- sub.textContent=msg;li.append(b,sub);list.append(li);
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ef3123"><title>IDECO WEB HUB – kiểm tra PWA v3.5</title><style>
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f6f8;color:#1b2430}.wrap{max-width:750px;margin:0 auto;padding:22px 16px 42px}.hero{background:linear-gradient(125deg,#e82820,#b71009);color:#fff;padding:22px;border-radius:22px}.hero h1{font-size:23px;margin:0}.hero p{margin:4px 0}.card{margin-top:14px;background:#fff;border-radius:18px;padding:17px 19px;box-shadow:0 3px 20px #1018280a}.result{border-bottom:1px solid #e9edf1;padding:10px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.ok{color:#128047;font-weight:750}.bad{color:#cb2222;font-weight:750}.warn{color:#a66800;font-weight:750}.note{font-size:13px;color:#5e6875}code{word-break:break-all;background:#f5f6f8;padding:2px 4px;border-radius:4px}a{color:#c31e14}button{border:0;background:#d92219;color:#fff;border-radius:11px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer}img{width:90px;height:90px;border-radius:18px;border:1px solid #eee}small{font-size:12px}</style></head><body><main class="wrap"><header class="hero"><h1>IDECO WEB HUB · Kiểm tra cài đặt</h1><p>Đối chiếu trực tiếp file trên website – Android / iOS v3.5</p><small id="url"></small></header><section class="card"><h2>Biểu tượng đúng</h2><img src="icon-192.png" alt="IDECO WEB HUB" /><div class="note">Phải là logo đỏ khung bo góc, chữ IDECO WEB HUB.</div></section><section class="card"><h2>Trạng thái kiểm tra</h2><div id="checks">Đang kiểm tra...</div><p class="note">Nếu xuất hiện lỗi, hãy kiểm tra đúng đường dẫn GitHub Pages và bảo đảm tải các tệp nằm cùng cấp với <code>index.html</code>.</p><button id="again">Kiểm tra lại</button></section><section class="card"><h2>Cài lên màn hình chính</h2><p><b>Android Chrome:</b> mở trang chính <code>index.html</code> → menu ⋮ → <b>Cài đặt ứng dụng</b>. Khi cài đúng PWA, khởi chạy từ biểu tượng sẽ không có thanh địa chỉ.</p><p><b>iPhone Safari:</b> Chia sẻ → <b>Thêm vào Màn hình chính</b> → bật <b>Mở dưới dạng ứng dụng</b> (nếu có).</p><p class="note">Nếu chỉ hiện “Tạo lối tắt – mở trong Chrome” thì đó chưa phải ứng dụng PWA standalone. Xóa lối tắt cũ sau khi tải đủ file và cài lại.</p><p><a href="./">Mở trang IDECO WEB HUB</a></p></section></main><script>
+const box=document.getElementById('checks'); document.getElementById('url').textContent=location.origin+location.pathname;
+const row=(label,good,detail='',warn=false)=>`<div class="result"><div><b>${label}</b><div class="note">${detail}</div></div><span class="${warn?'warn':good?'ok':'bad'}">${warn?'CẦN KIỂM TRA':good?'OK':'LỖI'}</span></div>`;
+async function check(){
+  let entries=[]; const secure=window.isSecureContext; entries.push(row('HTTPS / môi trường bảo mật',secure,location.origin));
+  let m=null;
+  try{let r=await fetch('./manifest.json?test='+Date.now(),{cache:'no-store'}); if(!r.ok) throw Error('HTTP '+r.status); m=await r.json(); entries.push(row('manifest.json',true,`Tên: ${m.name||'?'} · display: ${m.display}`));}
+  catch(e){entries.push(row('manifest.json',false,e.message));}
+  if(m){entries.push(row('Mở toàn màn hình không thanh URL',m.display==='standalone',`display=${m.display}`));
+    entries.push(row('start_url và scope',m.start_url==='./'&&m.scope==='./',`start_url=${m.start_url} · scope=${m.scope}`));}
+  for (const [label,file] of [['Logo Android 192','icon-192.png'],['Logo Android 512','icon-512.png'],['Logo maskable','icon-maskable-512.png'],['Logo iOS','apple-touch-icon.png'],['Service worker','sw.js']]){
+    try{const res=await fetch('./'+file+'?test='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);
+      if(file.endsWith('.png')){const blob=await res.blob();if(!blob.type.startsWith('image/'))throw Error('Trả về '+blob.type+' thay vì hình ảnh');const img=await new Promise((resolve,reject)=>{const u=URL.createObjectURL(blob);const i=new Image();i.onload=()=>{URL.revokeObjectURL(u);resolve(i)};i.onerror=()=>{URL.revokeObjectURL(u);reject(Error('Không đọc được PNG'))};i.src=u;});if(img.naturalWidth<180 && file!=='favicon-48.png')throw Error('Ảnh quá nhỏ');}
+      entries.push(row(label,true,file));}catch(e){entries.push(row(label,false,file+' – '+e.message));}}
+  const sw=('serviceWorker' in navigator);
+  if(sw){try{let reg=await navigator.serviceWorker.getRegistration('./'); entries.push(row('Service worker đăng ký',!!reg,reg?reg.scope:'Hãy mở trang chính index.html rồi kiểm tra lại',!reg));}
+    catch(e){entries.push(row('Service worker đăng ký',false,e.message));}}
+  else entries.push(row('Trình duyệt hỗ trợ service worker',false,'Không hỗ trợ API'));
+  const installed=matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;
+  entries.push(row('Đang mở dưới dạng ứng dụng',installed,installed?'Không có thanh địa chỉ Chrome/Safari':'Bạn đang mở trong tab trình duyệt; hãy cài và mở từ biểu tượng',!installed));
+  box.innerHTML=entries.join('');
 }
-async function test(){
- list.textContent='';
- add('HTTPS',isSecureContext?'OK':'LỖI',isSecureContext?'Trình duyệt cho phép dùng PWA':'Trang cần được mở qua HTTPS hoặc localhost');
- for(const [title,name,type] of files){
-  const url=new URL(name,base);
-  try{
-   const res=await fetch(url.href+(url.search?'&':'?')+'check='+Date.now(),{cache:'no-store'});
-   if(!res.ok){add(title,'LỖI',`HTTP ${res.status}: ${url.href}`);continue;}
-   if(type==='image'){
-      const blob=await res.blob();
-      if(!blob.type.startsWith('image/')){add(title,'LỖI',`Không phải tệp ảnh: ${blob.type || 'không có MIME'}`);continue;}
-      const image=await createImageBitmap(blob);
-      add(title,'OK',`${image.width} × ${image.height} — ${url.href}`);image.close();
-   } else if(type==='json'){
-      const obj=await res.json();
-      if(!obj.icons?.length || !obj.name || !obj.start_url || obj.display!=='standalone') throw Error('Manifest thiếu trường cần thiết');
-      add(title,'OK',`${obj.name} · ${obj.icons.length} icons · ${url.href}`);
-   } else {
-      const txt=await res.text();
-      if(!txt.trim()) throw Error('Tệp trống');
-      add(title,'OK',url.href);
-   }
-  } catch(e){add(title,'LỖI',`${e.message} — ${url.href}`);}
- }
- if(!('serviceWorker' in navigator)) add('Trình duyệt hỗ trợ SW','LỖI','Hãy sử dụng Chrome Android hoặc Safari iOS mới');
- else{
-   try { const reg=await navigator.serviceWorker.getRegistration(base.href);
-     add('Service Worker đã đăng ký',reg?'OK':'CHƯA',reg?`Phạm vi: ${reg.scope}`:'Mở index.html một lần và tải lại trang để service worker đăng ký');
-   }catch(e){add('Service Worker','LỖI',e.message)}
- }
- add('Lưu ý','CHƯA','Ngay cả khi mọi mục OK, quyền cài đặt còn phụ thuộc trình duyệt và thiết bị. Android mở bằng Chrome, iOS thêm bằng Safari.');
-}
-document.getElementById('test').addEventListener('click',test);test();
+document.getElementById('again').addEventListener('click',check);check();
 </script></body></html>
