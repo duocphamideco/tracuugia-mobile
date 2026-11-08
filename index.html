@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ef3123" />
-<!-- IDECO WEB HUB PWA v3.6 - added De xuat & Duyet menu -->
+<!-- IDECO WEB HUB PWA v3.7 - added Bao gia dien tu chuyen nghiep menu -->
 <meta name="description" content="IDECO WEB HUB – trung tâm ứng dụng nội bộ trên Android và iOS" />
 <meta name="application-name" content="IDECO WEB HUB" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -403,6 +403,13 @@ const defaults = [
     icon: "🖼️",
     target: "_hub"
   },
+  {
+    id: "bao-gia-dien-tu-chuyen-nghiep",
+    name: "BÁO GIÁ ĐIỆN TỬ CHUYÊN NGHIỆP",
+    url: "https://duocphamideco.github.io/bangbaogia/",
+    icon: "📊",
+    target: "_hub"
+  },
  {
     id: "baocao-giaodich",
     name: "KHAI BÁO CÁO GIAO DỊCH",
@@ -522,6 +529,18 @@ function loadApps() {
         source = [...source, {...deXuatApp}];
       }
       localStorage.setItem(deXuatMigrationKey, "1");
+    }
+    // v3.7: tự thêm mục BÁO GIÁ ĐIỆN TỬ CHUYÊN NGHIỆP trên thiết bị đã dùng HUB.
+    // Chỉ thêm một lần, tránh trùng nếu người dùng đã tự tạo; giữ nguyên menu tùy chỉnh.
+    const baoGiaDienTuMigrationKey = "ideco_mobile_hub_added_bao_gia_dien_tu_v1";
+    if (!localStorage.getItem(baoGiaDienTuMigrationKey)) {
+      const newBaoGia = defaults.find(a => a.id === "bao-gia-dien-tu-chuyen-nghiep");
+      const normalizeBaoGiaUrl = url => String(url || "").trim().replace(/\/+$/, "").toLowerCase();
+      if (!source.some(a => a && (a.id === newBaoGia.id ||
+          normalizeBaoGiaUrl(a.url) === normalizeBaoGiaUrl(newBaoGia.url)))) {
+        source = [...source, {...newBaoGia}];
+      }
+      localStorage.setItem(baoGiaDienTuMigrationKey, "1");
     }
   } catch(e) {
     // localStorage có thể bị chặn: vẫn hiển thị menu mặc định.

@@ -1,8 +1,9 @@
-IDECO WEB HUB v3.6 – CÀI THÀNH ỨNG DỤNG FULL MÀN HÌNH (ANDROID + IOS)
+IDECO WEB HUB v3.7 – CÀI THÀNH ỨNG DỤNG FULL MÀN HÌNH (ANDROID + IOS)
 
 BẢN GỐC: APP CHUẨN IDECO HUB.zip (IDECO WEB HUB v3.5) do anh gửi.
-CẬP NHẬT: Thêm menu 📝 ĐỀ XUẤT & DUYỆT → https://duocphamideco.github.io/duyetvanban-mobile/
-Menu mới tự thêm vào danh sách đã lưu trên điện thoại/máy tính, không làm mất các menu đã thiết lập.
+CẬP NHẬT v3.6: Menu 📝 ĐỀ XUẤT & DUYỆT → https://duocphamideco.github.io/duyetvanban-mobile/
+CẬP NHẬT v3.7: Menu 📊 BÁO GIÁ ĐIỆN TỬ CHUYÊN NGHIỆP → https://duocphamideco.github.io/bangbaogia/
+Các menu mới tự thêm vào danh sách đã lưu trên điện thoại/máy tính, không làm mất các menu đã thiết lập.
 Mặc định menu mở trong IDECO HUB; nếu trang ngoài chặn nhúng, bấm "MỞ TRỰC TIẾP".
 
 CƠ CHẾ CHUẨN THAM KHẢO: HUYỀN TRỢ LÝ (manifest.json + sw.js + các icon ở thư mục gốc).

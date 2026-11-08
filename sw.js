@@ -1,7 +1,7 @@
-/* IDECO WEB HUB v3.6 — service worker (mẫu cấu trúc HUYỀN TRỢ LÝ).
+/* IDECO WEB HUB v3.7 — service worker (mẫu cấu trúc HUYỀN TRỢ LÝ).
    Network first: code/app/icon updates propagate from GitHub Pages.
    Only the HUB shell is intercepted; embedded external apps, ERP, Firebase, APIs remain untouched. */
-const CACHE = 'ideco-web-hub-v3.6';
+const CACHE = 'ideco-web-hub-v3.7';
 const ROOT = new URL('./', self.registration.scope);
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png',
   './icon-512.png', './icon-maskable-192.png', './icon-maskable-512.png',
